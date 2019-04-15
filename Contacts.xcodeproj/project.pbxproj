@@ -7,21 +7,49 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D5411F2B226465AB00FFE4EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F2A226465AB00FFE4EE /* AppDelegate.swift */; };
-		D5411F2D226465AB00FFE4EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F2C226465AB00FFE4EE /* ViewController.swift */; };
+		D5411F2B226465AB00FFE4EE /* GKAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F2A226465AB00FFE4EE /* GKAppDelegate.swift */; };
+		D5411F2D226465AB00FFE4EE /* GKSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F2C226465AB00FFE4EE /* GKSplashViewController.swift */; };
 		D5411F30226465AB00FFE4EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5411F2E226465AB00FFE4EE /* Main.storyboard */; };
 		D5411F32226465B000FFE4EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5411F31226465B000FFE4EE /* Assets.xcassets */; };
 		D5411F35226465B000FFE4EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5411F33226465B000FFE4EE /* LaunchScreen.storyboard */; };
+		D5411F4322647C8B00FFE4EE /* GKConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F4222647C8B00FFE4EE /* GKConstant.swift */; };
+		D5411F4C22647F0A00FFE4EE /* GKRequest+Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F4B22647F0A00FFE4EE /* GKRequest+Contacts.swift */; };
+		D5411F4E22647F3800FFE4EE /* GKAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F4D22647F3800FFE4EE /* GKAPIRequest.swift */; };
+		D5411F5022647F5500FFE4EE /* GKAPIRequest+Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F4F22647F5500FFE4EE /* GKAPIRequest+Contacts.swift */; };
+		D5411F5222647F9B00FFE4EE /* GKAPIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F5122647F9B00FFE4EE /* GKAPIConstant.swift */; };
+		D5411F5422647FB400FFE4EE /* GKAPIRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F5322647FB400FFE4EE /* GKAPIRequestType.swift */; };
+		D5411F5622647FCC00FFE4EE /* GKAPIStringUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F5522647FCB00FFE4EE /* GKAPIStringUrl.swift */; };
+		D5411F582264802A00FFE4EE /* GKContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F572264802A00FFE4EE /* GKContact.swift */; };
+		D5411F5C2264814B00FFE4EE /* UIViewController+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F5B2264814B00FFE4EE /* UIViewController+Protocol.swift */; };
+		D5411F5E2264819600FFE4EE /* Storyboard+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F5D2264819600FFE4EE /* Storyboard+Protocol.swift */; };
+		D5411F602264822D00FFE4EE /* GKBasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F5F2264822D00FFE4EE /* GKBasicViewController.swift */; };
+		D5411F622264824200FFE4EE /* GKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F612264824200FFE4EE /* GKViewController.swift */; };
+		D5411F652264851300FFE4EE /* GKError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F642264851300FFE4EE /* GKError.swift */; };
+		D5411F672264852100FFE4EE /* GKLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F662264852100FFE4EE /* GKLogger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D5411F27226465AB00FFE4EE /* Contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Contacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5411F2A226465AB00FFE4EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D5411F2C226465AB00FFE4EE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D5411F2A226465AB00FFE4EE /* GKAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKAppDelegate.swift; sourceTree = "<group>"; };
+		D5411F2C226465AB00FFE4EE /* GKSplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKSplashViewController.swift; sourceTree = "<group>"; };
 		D5411F2F226465AB00FFE4EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D5411F31226465B000FFE4EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5411F34226465B000FFE4EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D5411F36226465B000FFE4EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5411F4222647C8B00FFE4EE /* GKConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKConstant.swift; sourceTree = "<group>"; };
+		D5411F4B22647F0A00FFE4EE /* GKRequest+Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GKRequest+Contacts.swift"; sourceTree = "<group>"; };
+		D5411F4D22647F3800FFE4EE /* GKAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKAPIRequest.swift; sourceTree = "<group>"; };
+		D5411F4F22647F5500FFE4EE /* GKAPIRequest+Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GKAPIRequest+Contacts.swift"; sourceTree = "<group>"; };
+		D5411F5122647F9B00FFE4EE /* GKAPIConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKAPIConstant.swift; sourceTree = "<group>"; };
+		D5411F5322647FB400FFE4EE /* GKAPIRequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKAPIRequestType.swift; sourceTree = "<group>"; };
+		D5411F5522647FCB00FFE4EE /* GKAPIStringUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKAPIStringUrl.swift; sourceTree = "<group>"; };
+		D5411F572264802A00FFE4EE /* GKContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKContact.swift; sourceTree = "<group>"; };
+		D5411F5B2264814B00FFE4EE /* UIViewController+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Protocol.swift"; sourceTree = "<group>"; };
+		D5411F5D2264819600FFE4EE /* Storyboard+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboard+Protocol.swift"; sourceTree = "<group>"; };
+		D5411F5F2264822D00FFE4EE /* GKBasicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKBasicViewController.swift; sourceTree = "<group>"; };
+		D5411F612264824200FFE4EE /* GKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKViewController.swift; sourceTree = "<group>"; };
+		D5411F642264851300FFE4EE /* GKError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKError.swift; sourceTree = "<group>"; };
+		D5411F662264852100FFE4EE /* GKLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKLogger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +82,156 @@
 		D5411F29226465AB00FFE4EE /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
-				D5411F2A226465AB00FFE4EE /* AppDelegate.swift */,
-				D5411F2C226465AB00FFE4EE /* ViewController.swift */,
+				D5411F2A226465AB00FFE4EE /* GKAppDelegate.swift */,
+				D5411F2C226465AB00FFE4EE /* GKSplashViewController.swift */,
+				D5411F3C22647B9A00FFE4EE /* Classes */,
 				D5411F2E226465AB00FFE4EE /* Main.storyboard */,
 				D5411F31226465B000FFE4EE /* Assets.xcassets */,
 				D5411F33226465B000FFE4EE /* LaunchScreen.storyboard */,
 				D5411F36226465B000FFE4EE /* Info.plist */,
 			);
 			path = Contacts;
+			sourceTree = "<group>";
+		};
+		D5411F3C22647B9A00FFE4EE /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D5411F3F22647BD800FFE4EE /* GKModules */,
+				D5411F3E22647BC600FFE4EE /* GKLibrary */,
+				D5411F3D22647BB300FFE4EE /* GKCommon */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		D5411F3D22647BB300FFE4EE /* GKCommon */ = {
+			isa = PBXGroup;
+			children = (
+				D5411F4122647BFE00FFE4EE /* Extension */,
+				D5411F4022647BF600FFE4EE /* Protocols */,
+			);
+			path = GKCommon;
+			sourceTree = "<group>";
+		};
+		D5411F3E22647BC600FFE4EE /* GKLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				D5411F63226484F200FFE4EE /* GKClass */,
+				D5411F4622647D5500FFE4EE /* GKModel */,
+				D5411F4522647CE400FFE4EE /* GKConnection */,
+				D5411F4422647CDC00FFE4EE /* GKView */,
+				D5411F4222647C8B00FFE4EE /* GKConstant.swift */,
+			);
+			path = GKLibrary;
+			sourceTree = "<group>";
+		};
+		D5411F3F22647BD800FFE4EE /* GKModules */ = {
+			isa = PBXGroup;
+			children = (
+				D5411F682264906C00FFE4EE /* List */,
+				D5411F692264907B00FFE4EE /* Detail */,
+			);
+			path = GKModules;
+			sourceTree = "<group>";
+		};
+		D5411F4022647BF600FFE4EE /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D5411F5B2264814B00FFE4EE /* UIViewController+Protocol.swift */,
+				D5411F5D2264819600FFE4EE /* Storyboard+Protocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D5411F4122647BFE00FFE4EE /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		D5411F4422647CDC00FFE4EE /* GKView */ = {
+			isa = PBXGroup;
+			children = (
+				D5411F5F2264822D00FFE4EE /* GKBasicViewController.swift */,
+				D5411F612264824200FFE4EE /* GKViewController.swift */,
+			);
+			path = GKView;
+			sourceTree = "<group>";
+		};
+		D5411F4522647CE400FFE4EE /* GKConnection */ = {
+			isa = PBXGroup;
+			children = (
+				D5411F4922647E1500FFE4EE /* GKAPI */,
+				D5411F4722647D7200FFE4EE /* GKRequest */,
+			);
+			path = GKConnection;
+			sourceTree = "<group>";
+		};
+		D5411F4622647D5500FFE4EE /* GKModel */ = {
+			isa = PBXGroup;
+			children = (
+				D5411F572264802A00FFE4EE /* GKContact.swift */,
+			);
+			path = GKModel;
+			sourceTree = "<group>";
+		};
+		D5411F4722647D7200FFE4EE /* GKRequest */ = {
+			isa = PBXGroup;
+			children = (
+				D5411F4B22647F0A00FFE4EE /* GKRequest+Contacts.swift */,
+			);
+			path = GKRequest;
+			sourceTree = "<group>";
+		};
+		D5411F4822647DE300FFE4EE /* GKAPIRequest */ = {
+			isa = PBXGroup;
+			children = (
+				D5411F4F22647F5500FFE4EE /* GKAPIRequest+Contacts.swift */,
+			);
+			path = GKAPIRequest;
+			sourceTree = "<group>";
+		};
+		D5411F4922647E1500FFE4EE /* GKAPI */ = {
+			isa = PBXGroup;
+			children = (
+				D5411F4A22647E1E00FFE4EE /* GKAPICommon */,
+				D5411F4822647DE300FFE4EE /* GKAPIRequest */,
+				D5411F4D22647F3800FFE4EE /* GKAPIRequest.swift */,
+			);
+			path = GKAPI;
+			sourceTree = "<group>";
+		};
+		D5411F4A22647E1E00FFE4EE /* GKAPICommon */ = {
+			isa = PBXGroup;
+			children = (
+				D5411F5122647F9B00FFE4EE /* GKAPIConstant.swift */,
+				D5411F5322647FB400FFE4EE /* GKAPIRequestType.swift */,
+				D5411F5522647FCB00FFE4EE /* GKAPIStringUrl.swift */,
+			);
+			path = GKAPICommon;
+			sourceTree = "<group>";
+		};
+		D5411F63226484F200FFE4EE /* GKClass */ = {
+			isa = PBXGroup;
+			children = (
+				D5411F642264851300FFE4EE /* GKError.swift */,
+				D5411F662264852100FFE4EE /* GKLogger.swift */,
+			);
+			path = GKClass;
+			sourceTree = "<group>";
+		};
+		D5411F682264906C00FFE4EE /* List */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		D5411F692264907B00FFE4EE /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +305,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5411F2D226465AB00FFE4EE /* ViewController.swift in Sources */,
-				D5411F2B226465AB00FFE4EE /* AppDelegate.swift in Sources */,
+				D5411F5622647FCC00FFE4EE /* GKAPIStringUrl.swift in Sources */,
+				D5411F5422647FB400FFE4EE /* GKAPIRequestType.swift in Sources */,
+				D5411F5C2264814B00FFE4EE /* UIViewController+Protocol.swift in Sources */,
+				D5411F582264802A00FFE4EE /* GKContact.swift in Sources */,
+				D5411F4C22647F0A00FFE4EE /* GKRequest+Contacts.swift in Sources */,
+				D5411F2D226465AB00FFE4EE /* GKSplashViewController.swift in Sources */,
+				D5411F5E2264819600FFE4EE /* Storyboard+Protocol.swift in Sources */,
+				D5411F652264851300FFE4EE /* GKError.swift in Sources */,
+				D5411F4322647C8B00FFE4EE /* GKConstant.swift in Sources */,
+				D5411F622264824200FFE4EE /* GKViewController.swift in Sources */,
+				D5411F2B226465AB00FFE4EE /* GKAppDelegate.swift in Sources */,
+				D5411F672264852100FFE4EE /* GKLogger.swift in Sources */,
+				D5411F4E22647F3800FFE4EE /* GKAPIRequest.swift in Sources */,
+				D5411F5222647F9B00FFE4EE /* GKAPIConstant.swift in Sources */,
+				D5411F602264822D00FFE4EE /* GKBasicViewController.swift in Sources */,
+				D5411F5022647F5500FFE4EE /* GKAPIRequest+Contacts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

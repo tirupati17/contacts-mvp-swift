@@ -1,5 +1,5 @@
 //
-//  AppDelegate.swift
+//  GKAppDelegate.swift
 //  Contacts
 //
 //  Created by Tirupati Balan on 15/04/19.
@@ -9,7 +9,7 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class GKAppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
