@@ -30,7 +30,7 @@ class GKURLConnectionManager {
         return self.connectionWithRequest(apiRequest, success: nil, failure: nil)
     }
     
-    func connectionWithRequest(_ apiRequest: GKAPIRequest, success: ((Any) ->
+    func connectionWithRequest(_ apiRequest: GKAPIRequest, success: ((JSON) ->
         Void)!, failure:((Error) -> Void)!) -> URLSessionTask {
         var dataRequest : URLSessionTask!
         dataRequest = GKURLSessionManager.performRequest(apiRequest, success: { (response) in
@@ -44,23 +44,13 @@ class GKURLConnectionManager {
         return dataRequest
     }
     
-    func request(_ apiRequest: GKAPIRequest, didReceiveResponse response : JSON, success: ((Any) ->
+    func request(_ apiRequest: GKAPIRequest, didReceiveResponse response : JSON, success: ((JSON) ->
         Void)!) { //handle response either insert into database and notify controller or use local notification to notifiy
         
         switch apiRequest.requestType {
         case .APIRequestContactList?:
-            var arrayObject : [Contact] = []
-            if let responseObject = response as? NSArray {
-                for value in responseObject {
-                    if let value = value as? Data {
-                        let contact = try? JSONDecoder().decode(Contact.self, from: value)
-                        if let contact = contact {
-                            arrayObject.append(contact)
-                        }
-                    }
-                }
-            }
-            success(arrayObject as JSONArray)
+            let arrayObject = try! JSONDecoder().decode([Contact].self, from: response as! Data)
+            success(arrayObject as JSON)
             break
         default:
             success(response as JSON)

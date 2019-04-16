@@ -29,9 +29,9 @@ class GKAPIConstant {
         }
     }
     
-    let baseLocalUrl = "​http://gojek-contacts-app.herokuapp.com"
-    let baseProductionUrl = "​http://gojek-contacts-app.herokuapp.com"
-    let baseStagingUrl = "​http://gojek-contacts-app.herokuapp.com"
+    let baseLocalUrl = "http://gojek-contacts-app.herokuapp.com"
+    let baseProductionUrl = "http://gojek-contacts-app.herokuapp.com"
+    let baseStagingUrl = "http://gojek-contacts-app.herokuapp.com"
     
     static let apiVersion1 = ""
     static let apiVersion2 = ""

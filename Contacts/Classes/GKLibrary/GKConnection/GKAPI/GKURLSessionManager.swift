@@ -40,8 +40,9 @@ class GKURLSessionManager : URLSession {
     class func performRequest(_ apiRequest: GKAPIRequest, success: ((JSON) ->
         Void)!, failure:((Error) -> Void)!) -> URLSessionTask {
         let fullUrlString = self.fullPathForRequest(apiRequest)
-        let url = URL(string: fullUrlString)!
-        var request = URLRequest(url: url)
+        
+        let url = URL(string: fullUrlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+        var request = URLRequest(url: url!)
         
         GKLogger.log(fullUrlString)
         GKLogger.log(apiRequest.params)
@@ -49,7 +50,7 @@ class GKURLSessionManager : URLSession {
         var sessionTask : URLSessionTask!
         switch apiRequest.requestMethod {
         case GKRequestMethod.RequestMethodGet?:
-            sessionTask = GKURLSessionManager.defaultSharedInstance.dataTask(with: url, completionHandler: { (data, response, error) in
+            sessionTask = GKURLSessionManager.defaultSharedInstance.dataTask(with: url!, completionHandler: { (data, response, error) in
                 self.responseHandle(data: data, response: response, error: error, success: success, failure: failure)
             })
             sessionTask.resume()
@@ -128,14 +129,14 @@ class GKURLSessionManager : URLSession {
     class func fullPathForRequest(_ apiRequest : GKAPIRequest) -> String {
         var fullPath = self.fullPathWithUrlString(apiRequest.urlString!, apiRequest.requestType!)
         switch apiRequest.requestType {
-        case .APIRequestContactList?:
-            fullPath = "\(GKAPIConstant.sharedConstant.baseUrl())\(fullPath)"
-            break
-        default:
-            fullPath = "\(GKAPIConstant.sharedConstant.baseUrl())\(fullPath)"
-            break
+            case .APIRequestContactList?:
+                fullPath = "\(GKAPIConstant.sharedConstant.baseUrl())\(fullPath)"
+                break
+            default:
+                fullPath = "\(GKAPIConstant.sharedConstant.baseUrl())\(fullPath)"
+                break
         }
-        return fullPath.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        return fullPath
     }
     
     class func fullPathWithUrlString(_ urlString : String, _ apiRequestType : GKAPIRequestType) -> String {

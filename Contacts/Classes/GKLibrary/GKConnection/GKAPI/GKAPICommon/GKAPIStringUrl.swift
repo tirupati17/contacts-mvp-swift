@@ -16,8 +16,8 @@ enum GKRequestMethod : Int {
 }
 
 class GKAPIStringUrl {
-    static let kContactEndpoint = "contacts.json"
-    static let kContactWithIdEndpoint = "contacts/%@.json"
+    static let kContactEndpoint = "/contacts.json"
+    static let kContactWithIdEndpoint = "/contacts/%@.json"
     
     static func contactEndpoint() -> String {
         return kContactEndpoint

@@ -37,7 +37,7 @@ class GKAPIRequest {
     }
     
     func performRequestWith(success:((JSON) -> Void)!, failure:((Error) -> Void)!) {
-        //self.dataRequest = GKURLConnectionManager.sharedInstance.connectionWithRequest(self, success: success, failure: failure)
+        self.dataRequest = GKURLConnectionManager.sharedInstance.connectionWithRequest(self, success: success, failure: failure)
     }
     
     func cancelRequest() {
