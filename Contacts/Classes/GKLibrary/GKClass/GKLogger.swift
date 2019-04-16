@@ -7,3 +7,18 @@
 //
 
 import Foundation
+
+class GKLogger {
+    var isLogEnabled = true
+    
+    class var sharedLogger : GKLogger {
+        struct defaultSingleton {
+            static let loggerInstance = GKLogger()
+        }
+        return defaultSingleton.loggerInstance
+    }
+    
+    class func log(_ logString : Any) {
+        print(GKLogger.sharedLogger.isLogEnabled ? "GK: \(logString)" : "")
+    }
+}

@@ -7,3 +7,21 @@
 //
 
 import Foundation
+
+struct Welcome: Codable {
+    let firstName, lastName, email, phoneNumber: String?
+    let profilePic: String?
+    let favorite: Bool?
+    let createdAt, updatedAt: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case email
+        case phoneNumber = "phone_number"
+        case profilePic = "profile_pic"
+        case favorite
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}
