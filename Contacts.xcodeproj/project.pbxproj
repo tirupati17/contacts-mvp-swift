@@ -28,6 +28,8 @@
 		D5411F672264852100FFE4EE /* GKLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F662264852100FFE4EE /* GKLogger.swift */; };
 		D5411F712264922400FFE4EE /* ContactsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F702264922400FFE4EE /* ContactsTests.swift */; };
 		D5411F7F2264923D00FFE4EE /* ContactsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F7E2264923D00FFE4EE /* ContactsUITests.swift */; };
+		D5411F892265AADD00FFE4EE /* GKURLSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F872265AADC00FFE4EE /* GKURLSessionManager.swift */; };
+		D5411F8B2265B59200FFE4EE /* GKURLConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F8A2265B59200FFE4EE /* GKURLConnectionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		D5411F7C2264923D00FFE4EE /* ContactsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContactsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5411F7E2264923D00FFE4EE /* ContactsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUITests.swift; sourceTree = "<group>"; };
 		D5411F802264923D00FFE4EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5411F872265AADC00FFE4EE /* GKURLSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKURLSessionManager.swift; sourceTree = "<group>"; };
+		D5411F8A2265B59200FFE4EE /* GKURLConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKURLConnectionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +244,8 @@
 				D5411F4A22647E1E00FFE4EE /* GKAPICommon */,
 				D5411F4822647DE300FFE4EE /* GKAPIRequest */,
 				D5411F4D22647F3800FFE4EE /* GKAPIRequest.swift */,
+				D5411F8A2265B59200FFE4EE /* GKURLConnectionManager.swift */,
+				D5411F872265AADC00FFE4EE /* GKURLSessionManager.swift */,
 			);
 			path = GKAPI;
 			sourceTree = "<group>";
@@ -431,12 +437,14 @@
 				D5411F5C2264814B00FFE4EE /* UIViewController+Protocol.swift in Sources */,
 				D5411F582264802A00FFE4EE /* GKContact.swift in Sources */,
 				D5411F4C22647F0A00FFE4EE /* GKRequest+Contacts.swift in Sources */,
+				D5411F8B2265B59200FFE4EE /* GKURLConnectionManager.swift in Sources */,
 				D5411F2D226465AB00FFE4EE /* GKSplashViewController.swift in Sources */,
 				D5411F5E2264819600FFE4EE /* Storyboard+Protocol.swift in Sources */,
 				D5411F652264851300FFE4EE /* GKError.swift in Sources */,
 				D5411F4322647C8B00FFE4EE /* GKConstant.swift in Sources */,
 				D5411F622264824200FFE4EE /* GKViewController.swift in Sources */,
 				D5411F2B226465AB00FFE4EE /* GKAppDelegate.swift in Sources */,
+				D5411F892265AADD00FFE4EE /* GKURLSessionManager.swift in Sources */,
 				D5411F672264852100FFE4EE /* GKLogger.swift in Sources */,
 				D5411F4E22647F3800FFE4EE /* GKAPIRequest.swift in Sources */,
 				D5411F5222647F9B00FFE4EE /* GKAPIConstant.swift in Sources */,

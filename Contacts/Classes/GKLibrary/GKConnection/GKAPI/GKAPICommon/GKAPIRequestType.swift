@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+enum GKAPIRequestType: Int {
+    case APIRequestContactList = 1
+    case APIRequestContactDetail = 2
+    case APIRequestContactCreate = 3
+    case APIRequestContactUpdate = 4
+    case APIRequestContactDelete = 5
+    case APIRequestUndefined = 100
+}

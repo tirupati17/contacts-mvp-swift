@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Welcome: Codable {
+struct Contact: Codable {
     let firstName, lastName, email, phoneNumber: String?
     let profilePic: String?
     let favorite: Bool?

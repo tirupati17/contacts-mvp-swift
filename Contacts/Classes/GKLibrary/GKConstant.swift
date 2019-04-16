@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+class GKConstant {
+    static var AppBundleName : String {
+        return Bundle.main.infoDictionary!["CFBundleIdentifier"] as! String
+    }
+}
