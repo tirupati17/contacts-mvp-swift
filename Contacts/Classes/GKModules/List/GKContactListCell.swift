@@ -48,6 +48,7 @@ class GKContactListCell : GKTableViewCell {
         imageView.layer.cornerRadius = 20
         imageView.layer.borderColor = UIColor.init(white: 0.96, alpha: 1).cgColor
         imageView.layer.borderWidth = 1
+        imageView.image = UIImage(named: "placeholder_photo")
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFit
         return imageView

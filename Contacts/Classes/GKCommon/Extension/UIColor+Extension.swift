@@ -16,8 +16,8 @@ extension UIColor {
         return UIColor.blue
     }
     
-    class func navigationTitleColor() -> UIColor {
-        if let color = UIColor.init(hex: "#4A4A4A") {
+    class func navigationTitleColor(a : CGFloat? = 1.0) -> UIColor {
+        if let color = UIColor.init(hex: "#4A4A4A", a : a) {
             return color
         }
         return UIColor.darkGray
@@ -30,15 +30,15 @@ extension UIColor {
         return UIColor.lightGray
     }
     
-    class func tableViewGroupHeaderColor() -> UIColor {
-        if let color = UIColor.init(hex: "#E8E8E8") {
+    class func tableViewGroupHeaderColor(a : CGFloat? = 1.0) -> UIColor {
+        if let color = UIColor.init(hex: "#E8E8E8", a: a) {
             return color
         }
         return UIColor.darkGray
     }
 
     
-    public convenience init?(hex: String) {
+    public convenience init?(hex: String, a : CGFloat? = 1.0) {
         let r, g, b, a: CGFloat
         
         if hex.hasPrefix("#") {
