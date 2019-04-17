@@ -6,7 +6,6 @@
 //  Copyright © 2019 Tirupati Balan. All rights reserved.
 //
 
-import Foundation
 
 extension NSMutableData {
     func appendString(_ string: String) {
@@ -101,7 +100,7 @@ class GKURLSessionManager : URLSession {
             mimeType == "application/json",
             let data = data,
             let dataString = String(data: data, encoding: .utf8) {
-            GKLogger.log("\(dataString)")
+            //GKLogger.log("\(dataString)")
         }
         
         switch (response.statusCode) {

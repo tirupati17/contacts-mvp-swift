@@ -6,8 +6,6 @@
 //  Copyright © 2019 Tirupati Balan. All rights reserved.
 //
 
-import Foundation
-import UIKit
 
 protocol DismissProtocol {
     func dismiss(_ sender : Any)

@@ -6,10 +6,8 @@
 //  Copyright © 2019 Tirupati Balan. All rights reserved.
 //
 
-import Foundation
-import UIKit
 
-class GKViewController : GKBasicViewController {
+class GKViewController : GKBasicViewController, UIViewControllerProtocol, StoryboardIdentifiable {
     var activityIndicatorView = UIActivityIndicatorView(style: .gray)
     
     lazy var refreshControl: UIRefreshControl = {
@@ -35,6 +33,12 @@ class GKViewController : GKBasicViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+
+    func startViewAnimation() {
+        DispatchQueue.main.async {
+            self.activityIndicatorView.startAnimating()
+        }
+    }
     
     func stopViewAnimation() {
         DispatchQueue.main.async {
@@ -47,16 +51,28 @@ class GKViewController : GKBasicViewController {
         
     }
     
-    func startViewAnimation() {
-        DispatchQueue.main.async {
-            self.activityIndicatorView.startAnimating()
-        }
-    }
-    
     func showAlertWithTitleAndMessage(title: String, message: String, handler: ((UIAlertAction) -> Swift.Void)? = nil) {
         let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: handler))
         self.present(alert, animated: true, completion: {
         })
+    }
+    
+    func presentController<T>(_ vc: T) {
+        if let vc = vc as? UIViewController {
+            present(vc, animated: true) {
+                
+            }
+        }
+    }
+    
+    func pushController<T>(_ vc: T) {
+        if let vc = vc as? UIViewController {
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func didFailedResponse<T>(_ error : T) {
+        self.stopViewAnimation()
     }
 }

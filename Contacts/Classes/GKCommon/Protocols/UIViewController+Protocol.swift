@@ -6,4 +6,8 @@
 //  Copyright © 2019 Tirupati Balan. All rights reserved.
 //
 
-import Foundation
+protocol UIViewControllerProtocol {
+    func presentController<T>(_ vc: T)
+    func pushController<T>(_ vc: T)
+    func didFailedResponse<T>(_ error : T)
+}

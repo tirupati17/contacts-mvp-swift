@@ -6,7 +6,6 @@
 //  Copyright © 2019 Tirupati Balan. All rights reserved.
 //
 
-import Foundation
 
 extension GKAPIRequest {
     class func contactList(_ success : ((JSON) -> Void)?, failure : ((Error) -> Void)?) {

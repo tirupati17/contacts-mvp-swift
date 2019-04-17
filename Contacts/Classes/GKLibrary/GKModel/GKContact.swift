@@ -6,12 +6,11 @@
 //  Copyright © 2019 Tirupati Balan. All rights reserved.
 //
 
-import Foundation
 
 struct Contact: Codable {
     let firstName, lastName, email, phoneNumber: String?
     let profilePic: String?
-    let favorite: Bool?
+    var favorite: Bool = false
     let createdAt, updatedAt: String?
     
     enum CodingKeys: String, CodingKey {

@@ -1,0 +1,66 @@
+//
+//  UIColor+Extension.swift
+//  Contacts
+//
+//  Created by Tirupati Balan on 17/04/19.
+//  Copyright © 2019 Tirupati Balan. All rights reserved.
+//
+
+import Foundation
+
+extension UIColor {
+    class func themeColor() -> UIColor {
+        if let color = UIColor.init(hex: "#50E3C2") {
+            return color
+        }
+        return UIColor.blue
+    }
+    
+    class func navigationTitleColor() -> UIColor {
+        if let color = UIColor.init(hex: "#4A4A4A") {
+            return color
+        }
+        return UIColor.darkGray
+    }
+    
+    class func tableViewSeparatorLineColor() -> UIColor {
+        if let color = UIColor.init(hex: "#F0F0F0") {
+            return color
+        }
+        return UIColor.lightGray
+    }
+    
+    class func tableViewGroupHeaderColor() -> UIColor {
+        if let color = UIColor.init(hex: "#E8E8E8") {
+            return color
+        }
+        return UIColor.darkGray
+    }
+
+    
+    public convenience init?(hex: String) {
+        let r, g, b, a: CGFloat
+        
+        if hex.hasPrefix("#") {
+            let start = hex.index(hex.startIndex, offsetBy: 1)
+            let hexColor = String(hex[start...])
+            
+            if hexColor.count == 6 {
+                let scanner = Scanner(string: hexColor)
+                var hexNumber: UInt32 = 0
+                
+                if scanner.scanHexInt32(&hexNumber) {
+                    r = CGFloat((hexNumber & 0xff0000) >> 16) / 255
+                    g = CGFloat((hexNumber & 0xff00) >> 8) / 255
+                    b = CGFloat((hexNumber & 0xff) >> 0) / 255
+                    a = 1.0
+                    
+                    self.init(red: r, green: g, blue: b, alpha: a)
+                    return
+                }
+            }
+        }
+        
+        return nil
+    }
+}

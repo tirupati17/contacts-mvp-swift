@@ -6,15 +6,7 @@
 //  Copyright © 2019 Tirupati Balan. All rights reserved.
 //
 
-import Foundation
-import UIKit
 
 protocol StoryboardIdentifiable {
     static var storyboardIdentifier : String { get }
-}
-
-extension StoryboardIdentifiable where Self : UIViewController {
-    static var storyboardIdentifier : String {
-        return String(describing : self)
-    }
 }

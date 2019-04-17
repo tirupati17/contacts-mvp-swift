@@ -6,7 +6,6 @@
 //  Copyright © 2019 Tirupati Balan. All rights reserved.
 //
 
-import Foundation
 
 class GKConstant {
     static var AppBundleName : String {

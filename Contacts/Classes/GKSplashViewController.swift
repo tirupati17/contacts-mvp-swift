@@ -8,15 +8,15 @@
 
 import UIKit
 
-class GKSplashViewController: UIViewController {
+class GKSplashViewController: GKViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        GKAPIRequest.contactList({ (response) in
-            print(response)
-        }) { (error) in
-            print(error)
+        let vc = GKContactListView()
+        let nv = UINavigationController.init(rootViewController: vc)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.presentController(nv)
         }
     }
 

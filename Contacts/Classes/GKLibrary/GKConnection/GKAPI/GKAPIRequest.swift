@@ -6,7 +6,6 @@
 //  Copyright © 2019 Tirupati Balan. All rights reserved.
 //
 
-import Foundation
 
 typealias JSON = AnyObject
 typealias JSONDictionary = Dictionary<String, JSON>

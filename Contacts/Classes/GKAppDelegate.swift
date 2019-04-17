@@ -6,7 +6,8 @@
 //  Copyright © 2019 Tirupati Balan. All rights reserved.
 //
 
-import UIKit
+@_exported import UIKit
+@_exported import Foundation
 
 @UIApplicationMain
 class GKAppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,7 @@ class GKAppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        setupAppAppearance()
         return true
     }
 
@@ -41,6 +43,24 @@ class GKAppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+
+    func setupAppAppearance() {
+        let barButtonAppearance = UIBarButtonItem.appearance()
+        var fontAttribute = [NSAttributedString.Key.foregroundColor : UIColor.themeColor(), NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)]
+        let fontDisabledAttribute = [NSAttributedString.Key.foregroundColor : UIColor.themeColor(), NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)]
+        barButtonAppearance.setTitleTextAttributes(fontAttribute, for: .normal)
+        barButtonAppearance.setTitleTextAttributes(fontAttribute, for: .highlighted)
+        barButtonAppearance.setTitleTextAttributes(fontDisabledAttribute, for: .disabled)
+        barButtonAppearance.setTitleTextAttributes(fontAttribute, for: .focused)
+        
+        let appearance = UINavigationBar.appearance()
+        appearance.backgroundColor = UIColor.white
+        appearance.barTintColor = UIColor.white
+        appearance.tintColor = UIColor.themeColor()
+
+        fontAttribute = [NSAttributedString.Key.foregroundColor : UIColor.navigationTitleColor(), NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 17)]
+        appearance.titleTextAttributes = fontAttribute
+    }
 
 }
 

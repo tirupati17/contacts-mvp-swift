@@ -30,6 +30,16 @@
 		D5411F7F2264923D00FFE4EE /* ContactsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F7E2264923D00FFE4EE /* ContactsUITests.swift */; };
 		D5411F892265AADD00FFE4EE /* GKURLSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F872265AADC00FFE4EE /* GKURLSessionManager.swift */; };
 		D5411F8B2265B59200FFE4EE /* GKURLConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F8A2265B59200FFE4EE /* GKURLConnectionManager.swift */; };
+		D5F9B69C2266FFE500BB3052 /* GKContactListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F9B69B2266FFE500BB3052 /* GKContactListPresenter.swift */; };
+		D5F9B69E2266FFF700BB3052 /* GKContactListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F9B69D2266FFF700BB3052 /* GKContactListProtocol.swift */; };
+		D5F9B6A22267002800BB3052 /* GKContactListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F9B6A12267002800BB3052 /* GKContactListCell.swift */; };
+		D5F9B6A42267009300BB3052 /* GKTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F9B6A32267009300BB3052 /* GKTableViewCell.swift */; };
+		D5F9B6A62267035C00BB3052 /* GKContactListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F9B6A52267035C00BB3052 /* GKContactListView.swift */; };
+		D5F9B6AE2267631F00BB3052 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F9B6AD2267631F00BB3052 /* UIView+Extension.swift */; };
+		D5F9B6B02267634900BB3052 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F9B6AF2267634900BB3052 /* UIImageView+Extension.swift */; };
+		D5F9B6B222676A2200BB3052 /* UICollection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F9B6B122676A2200BB3052 /* UICollection+Extension.swift */; };
+		D5F9B6B422676D2100BB3052 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F9B6B322676D2100BB3052 /* UIStoryboard+Extension.swift */; };
+		D5F9B6B622677C0C00BB3052 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F9B6B522677C0C00BB3052 /* UIColor+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +89,16 @@
 		D5411F802264923D00FFE4EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5411F872265AADC00FFE4EE /* GKURLSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKURLSessionManager.swift; sourceTree = "<group>"; };
 		D5411F8A2265B59200FFE4EE /* GKURLConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKURLConnectionManager.swift; sourceTree = "<group>"; };
+		D5F9B69B2266FFE500BB3052 /* GKContactListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKContactListPresenter.swift; sourceTree = "<group>"; };
+		D5F9B69D2266FFF700BB3052 /* GKContactListProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKContactListProtocol.swift; sourceTree = "<group>"; };
+		D5F9B6A12267002800BB3052 /* GKContactListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKContactListCell.swift; sourceTree = "<group>"; };
+		D5F9B6A32267009300BB3052 /* GKTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKTableViewCell.swift; sourceTree = "<group>"; };
+		D5F9B6A52267035C00BB3052 /* GKContactListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKContactListView.swift; sourceTree = "<group>"; };
+		D5F9B6AD2267631F00BB3052 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		D5F9B6AF2267634900BB3052 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		D5F9B6B122676A2200BB3052 /* UICollection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollection+Extension.swift"; sourceTree = "<group>"; };
+		D5F9B6B322676D2100BB3052 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
+		D5F9B6B522677C0C00BB3052 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +212,11 @@
 		D5411F4122647BFE00FFE4EE /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				D5F9B6AD2267631F00BB3052 /* UIView+Extension.swift */,
+				D5F9B6AF2267634900BB3052 /* UIImageView+Extension.swift */,
+				D5F9B6B122676A2200BB3052 /* UICollection+Extension.swift */,
+				D5F9B6B322676D2100BB3052 /* UIStoryboard+Extension.swift */,
+				D5F9B6B522677C0C00BB3052 /* UIColor+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -201,6 +226,7 @@
 			children = (
 				D5411F5F2264822D00FFE4EE /* GKBasicViewController.swift */,
 				D5411F612264824200FFE4EE /* GKViewController.swift */,
+				D5F9B6A32267009300BB3052 /* GKTableViewCell.swift */,
 			);
 			path = GKView;
 			sourceTree = "<group>";
@@ -272,6 +298,10 @@
 		D5411F682264906C00FFE4EE /* List */ = {
 			isa = PBXGroup;
 			children = (
+				D5F9B6A52267035C00BB3052 /* GKContactListView.swift */,
+				D5F9B69B2266FFE500BB3052 /* GKContactListPresenter.swift */,
+				D5F9B69D2266FFF700BB3052 /* GKContactListProtocol.swift */,
+				D5F9B6A12267002800BB3052 /* GKContactListCell.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -435,20 +465,30 @@
 				D5411F5622647FCC00FFE4EE /* GKAPIStringUrl.swift in Sources */,
 				D5411F5422647FB400FFE4EE /* GKAPIRequestType.swift in Sources */,
 				D5411F5C2264814B00FFE4EE /* UIViewController+Protocol.swift in Sources */,
+				D5F9B6B222676A2200BB3052 /* UICollection+Extension.swift in Sources */,
 				D5411F582264802A00FFE4EE /* GKContact.swift in Sources */,
 				D5411F4C22647F0A00FFE4EE /* GKRequest+Contacts.swift in Sources */,
 				D5411F8B2265B59200FFE4EE /* GKURLConnectionManager.swift in Sources */,
+				D5F9B6B622677C0C00BB3052 /* UIColor+Extension.swift in Sources */,
+				D5F9B6A62267035C00BB3052 /* GKContactListView.swift in Sources */,
+				D5F9B6B422676D2100BB3052 /* UIStoryboard+Extension.swift in Sources */,
 				D5411F2D226465AB00FFE4EE /* GKSplashViewController.swift in Sources */,
 				D5411F5E2264819600FFE4EE /* Storyboard+Protocol.swift in Sources */,
+				D5F9B69E2266FFF700BB3052 /* GKContactListProtocol.swift in Sources */,
+				D5F9B6B02267634900BB3052 /* UIImageView+Extension.swift in Sources */,
+				D5F9B6A42267009300BB3052 /* GKTableViewCell.swift in Sources */,
 				D5411F652264851300FFE4EE /* GKError.swift in Sources */,
+				D5F9B69C2266FFE500BB3052 /* GKContactListPresenter.swift in Sources */,
 				D5411F4322647C8B00FFE4EE /* GKConstant.swift in Sources */,
 				D5411F622264824200FFE4EE /* GKViewController.swift in Sources */,
 				D5411F2B226465AB00FFE4EE /* GKAppDelegate.swift in Sources */,
 				D5411F892265AADD00FFE4EE /* GKURLSessionManager.swift in Sources */,
+				D5F9B6A22267002800BB3052 /* GKContactListCell.swift in Sources */,
 				D5411F672264852100FFE4EE /* GKLogger.swift in Sources */,
 				D5411F4E22647F3800FFE4EE /* GKAPIRequest.swift in Sources */,
 				D5411F5222647F9B00FFE4EE /* GKAPIConstant.swift in Sources */,
 				D5411F602264822D00FFE4EE /* GKBasicViewController.swift in Sources */,
+				D5F9B6AE2267631F00BB3052 /* UIView+Extension.swift in Sources */,
 				D5411F5022647F5500FFE4EE /* GKAPIRequest+Contacts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
