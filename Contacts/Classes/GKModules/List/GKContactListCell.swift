@@ -69,6 +69,7 @@ class GKContactListCell : GKTableViewCell {
         button.setTitleColor(UIColor.lightGray, for: UIControl.State())
         
         button.setImage(UIImage(named: imageName), for: UIControl.State())
+        button.setImage(UIImage(named: "favourite_button_selected"), for: .selected)
         button.setImage(UIImage(named: "favourite_button_selected"), for: .highlighted)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         
@@ -82,7 +83,7 @@ class GKContactListCell : GKTableViewCell {
             //As per given pdf size intructions
             addConstraintsWithFormat("H:|-16-[v0(40)]-16-[v1][v2(40)]-32-|", views: profileImageView, nameLabel, favouriteButton)
             
-            addConstraintsWithFormat("V:|-12-[v0(40)]|", views: profileImageView)
+            addConstraintsWithFormat("V:|-12-[v0(40)]", views: profileImageView)
             addConstraintsWithFormat("V:|-24-[v0(16)]", views: nameLabel)
             addConstraintsWithFormat("V:|-12-[v0(40)]", views: favouriteButton)
         }

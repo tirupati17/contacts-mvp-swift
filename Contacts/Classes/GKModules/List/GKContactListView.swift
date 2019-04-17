@@ -7,10 +7,6 @@
 //
 
 let contactListCellId = "GKContactListCellId"
-struct Section {
-    let letter : String
-    let contacts : [Contact]
-}
 
 class GKContactListView : GKViewController {
     var tableView : UITableView!
@@ -18,7 +14,11 @@ class GKContactListView : GKViewController {
     var contacts = [Contact]()
     var isUpdatedConstraints: Bool? = false
     var sections = [Section]()
-
+    struct Section {
+        let letter : String
+        let contacts : [Contact]
+    }
+    
     override func loadView() {
         super.loadView()
         self.configureDependencies()
@@ -27,7 +27,11 @@ class GKContactListView : GKViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(GKContactListCell.self, forCellReuseIdentifier: contactListCellId)
+        
         tableView.separatorColor = UIColor.tableViewSeparatorLineColor()
+        tableView.sectionIndexColor = .darkGray
+        tableView.sectionIndexBackgroundColor = .clear
+        
         view.addSubview(tableView)
         
         self.setupConstraints()
