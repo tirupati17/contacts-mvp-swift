@@ -51,7 +51,7 @@ class GKContactListCell : GKTableViewCell {
         imageView.layer.borderWidth = 1
         imageView.image = UIImage(named: "placeholder_photo")
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
 

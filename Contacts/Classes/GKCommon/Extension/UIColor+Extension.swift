@@ -9,8 +9,8 @@
 import Foundation
 
 extension UIColor {
-    class func themeColor() -> UIColor {
-        if let color = UIColor.init(hex: "#50E3C2") {
+    class func themeColor(a : CGFloat? = 1.0) -> UIColor {
+        if let color = UIColor.init(hex: "#50E3C2", a : a) {
             return color
         }
         return UIColor.blue

@@ -15,7 +15,7 @@ class GKSplashViewController: GKViewController {
 
         let vc = GKContactListView()
         let nv = UINavigationController.init(rootViewController: vc)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
             self.presentController(nv)
         }
     }

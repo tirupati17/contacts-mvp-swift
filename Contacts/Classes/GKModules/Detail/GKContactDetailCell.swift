@@ -16,9 +16,9 @@ class GKContactDetailCell : GKTableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         addSubview(nameLabel)
-        addSubview(profileImageView)
         addSubview(messageButton)
         addSubview(cameraButton)
+        addSubview(callButton)
         addSubview(emailButton)
         addSubview(favouriteButton)
         addSubview(firstNameStaticLabel)
@@ -29,6 +29,7 @@ class GKContactDetailCell : GKTableViewCell {
         addSubview(lastNameTextField)
         addSubview(mobileTextField)
         addSubview(emailTextField)
+        addSubview(profileImageView)
 
         messageButton.addTarget(self, action: #selector(messageAction), for: .touchUpInside)
         cameraButton.addTarget(self, action: #selector(cameraAction), for: .touchUpInside)
@@ -92,17 +93,17 @@ class GKContactDetailCell : GKTableViewCell {
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.cornerRadius = 20
-        imageView.layer.borderColor = UIColor.init(white: 0.96, alpha: 1).cgColor
-        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.borderWidth = 3
         imageView.clipsToBounds = true
+        imageView.image = UIImage(named: "placeholder_photo")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 17)
         label.textColor = UIColor.navigationTitleColor()
         label.numberOfLines = 1
         return label
@@ -201,6 +202,22 @@ class GKContactDetailHeaderCell : GKContactDetailCell {
         self.setupConstraints()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
+    
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.height/2
+
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = [UIColor.white.cgColor, UIColor.init(hex: "#CAF7ED")!.cgColor]
+        gradientLayer.opacity = 0.55
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -209,6 +226,32 @@ class GKContactDetailHeaderCell : GKContactDetailCell {
         if (isUpdatedConstraints == false) {
             isUpdatedConstraints = true
             
+            //Need to improve below code
+            var constraints = NSLayoutConstraint.constraints(
+                withVisualFormat: "V:[superview]-(<=1)-[profileImageView(124)]",
+                options: NSLayoutConstraint.FormatOptions.alignAllCenterX,
+                metrics: nil,
+                views: ["superview":self, "profileImageView":profileImageView]) //Align profileImageView center
+            addConstraints(constraints)
+            
+            constraints = NSLayoutConstraint.constraints(
+                withVisualFormat: "V:[superview]-(<=1)-[nameLabel]",
+                options: NSLayoutConstraint.FormatOptions.alignAllCenterX,
+                metrics: nil,
+                views: ["superview":self, "nameLabel":nameLabel]) //Align nameLabel center
+            addConstraints(constraints)
+
+            addConstraintsWithFormat("V:|-84-[v0(124)]", views: profileImageView)
+            addConstraintsWithFormat("V:|-212-[v0(24)]", views: nameLabel) //84 + 120 + 8 = 212
+            
+            let screenWidth = UIScreen.main.bounds.width
+            let distance = ((screenWidth - (44 * 4)) - 88)/3
+            addConstraintsWithFormat("H:|-44-[v0(44)]-\(distance)-[v1(44)]-\(distance)-[v2(44)]-\(distance)-[v3(44)]-44-|", views: messageButton, callButton, emailButton, favouriteButton)
+            addConstraintsWithFormat("V:|-260-[v0(44)]", views: messageButton) //212 + 24 + 24 = 260
+            addConstraintsWithFormat("V:|-260-[v0(44)]", views: callButton) //212 + 24 + 24 = 260
+            addConstraintsWithFormat("V:|-260-[v0(44)]", views: emailButton) //212 + 24 + 24 = 260
+            addConstraintsWithFormat("V:|-260-[v0(44)]", views: favouriteButton) //212 + 24 + 24 = 260
+
         }
     }
 }

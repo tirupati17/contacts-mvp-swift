@@ -78,6 +78,7 @@ class GKContactListView : GKViewController {
     }
     
     override func loadData() {
+        super.loadData()
         self.contactListPresenterProtocol.didFetchContacts()
     }
     

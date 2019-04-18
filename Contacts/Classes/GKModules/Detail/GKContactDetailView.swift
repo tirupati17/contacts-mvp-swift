@@ -35,6 +35,7 @@ class GKContactDetailView : GKViewController {
         tableView.separatorColor = UIColor.tableViewSeparatorLineColor()
         tableView.sectionIndexColor = .darkGray
         tableView.sectionIndexBackgroundColor = .clear
+        tableView.tableFooterView = UIView.init()
         
         view.addSubview(tableView)
         
@@ -43,9 +44,18 @@ class GKContactDetailView : GKViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController!.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = false
+
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .edit, target: self, action: #selector(editContact))
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+         super.viewWillDisappear(animated)
+         self.navigationController?.navigationBar.shadowImage = nil
+         self.navigationController?.navigationBar.isTranslucent = false
+    }
     func configureDependencies() {
         let contactDetailPresenter = GKContactDetailPresenter()
         contactDetailPresenter.contactDetailViewProtocol = self
@@ -89,6 +99,7 @@ class GKContactDetailView : GKViewController {
     }
     
     override func loadData() {
+        super.loadData()
         self.contactDetailPresenterProtocol.didFetchContactDetail(self.contact.id.toString())
     }
     
