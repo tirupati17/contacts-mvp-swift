@@ -29,6 +29,7 @@ class GKContactListView : GKViewController {
         tableView.register(GKContactListCell.self, forCellReuseIdentifier: contactListCellId)
         
         tableView.separatorColor = UIColor.tableViewSeparatorLineColor()
+        tableView.backgroundColor = UIColor.tableViewBackgroundColor()
         tableView.sectionIndexColor = .darkGray
         tableView.sectionIndexBackgroundColor = .clear
         
@@ -61,8 +62,7 @@ class GKContactListView : GKViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.startViewAnimation()
-        self.contactListPresenterProtocol.didFetchContacts()
+        loadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,6 +74,10 @@ class GKContactListView : GKViewController {
     }
     
     override func handleRefresh(_ refreshControl: UIRefreshControl) {
+        loadData()
+    }
+    
+    override func loadData() {
         self.contactListPresenterProtocol.didFetchContacts()
     }
     
@@ -128,6 +132,11 @@ extension GKContactListView : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if let contact = self.sections[safe : indexPath.section]?.contacts[safe : indexPath.row] {
+            let contactDetailView = GKContactDetailView()
+            contactDetailView.contact = contact
+            self.pushController(contactDetailView)
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

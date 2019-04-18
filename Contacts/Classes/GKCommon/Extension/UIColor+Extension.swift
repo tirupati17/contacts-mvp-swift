@@ -16,6 +16,13 @@ extension UIColor {
         return UIColor.blue
     }
     
+    class func tableViewBackgroundColor(a : CGFloat? = 1.0) -> UIColor {
+        if let color = UIColor.init(hex: "#F9F9F9", a : a) {
+            return color
+        }
+        return UIColor.darkGray
+    }
+
     class func navigationTitleColor(a : CGFloat? = 1.0) -> UIColor {
         if let color = UIColor.init(hex: "#4A4A4A", a : a) {
             return color

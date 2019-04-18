@@ -51,6 +51,10 @@ class GKURLConnectionManager {
             let arrayObject = try! JSONDecoder().decode([Contact].self, from: response as! Data)
             success(arrayObject as JSON)
             break
+        case .APIRequestContactDetail?:
+            let object = try! JSONDecoder().decode(Contact.self, from: response as! Data)
+            success(object as JSON)
+            break
         default:
             success(response as JSON)
             break

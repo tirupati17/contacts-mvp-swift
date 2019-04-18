@@ -6,4 +6,14 @@
 //  Copyright © 2019 Tirupati Balan. All rights reserved.
 //
 
-import Foundation
+protocol GKContactDetailViewProtocol : UIViewControllerProtocol {
+    func updateContactDetail(_ contact: Contact?)
+}
+
+protocol GKContactDetailPresenterProtocol {
+    func didDeleteContact(contact : Contact)
+    func didUpdateFavourite(forContact : Contact)
+    func didUpdateContact(forContact : Contact)
+    func didCreateContact(forContact : Contact)
+    func didFetchContactDetail(_ id: String)
+}

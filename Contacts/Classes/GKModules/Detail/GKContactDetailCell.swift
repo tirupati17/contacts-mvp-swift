@@ -21,6 +21,10 @@ class GKContactDetailCell : GKTableViewCell {
         addSubview(cameraButton)
         addSubview(emailButton)
         addSubview(favouriteButton)
+        addSubview(firstNameStaticLabel)
+        addSubview(lastNameStaticLabel)
+        addSubview(mobileStaticLabel)
+        addSubview(emailStaticLabel)
         addSubview(firstNameTextField)
         addSubview(lastNameTextField)
         addSubview(mobileTextField)
@@ -106,6 +110,7 @@ class GKContactDetailCell : GKTableViewCell {
     
     let firstNameStaticLabel: UILabel = {
         let label = UILabel()
+        label.text = "First Name"
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = UIColor.navigationTitleColor(a: 0.5)
         label.numberOfLines = 1
@@ -122,6 +127,7 @@ class GKContactDetailCell : GKTableViewCell {
     
     let lastNameStaticLabel: UILabel = {
         let label = UILabel()
+        label.text = "Last Name"
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = UIColor.navigationTitleColor(a: 0.5)
         label.numberOfLines = 1
@@ -138,6 +144,7 @@ class GKContactDetailCell : GKTableViewCell {
 
     let mobileStaticLabel: UILabel = {
         let label = UILabel()
+        label.text = "mobile"
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = UIColor.navigationTitleColor(a: 0.5)
         label.numberOfLines = 1
@@ -154,6 +161,7 @@ class GKContactDetailCell : GKTableViewCell {
     
     let emailStaticLabel: UILabel = {
         let label = UILabel()
+        label.text = "email"
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = UIColor.navigationTitleColor(a: 0.5)
         label.numberOfLines = 1
@@ -220,8 +228,8 @@ class GKContactDetailFirstNameCell : GKContactDetailCell {
             isUpdatedConstraints = true
             
             //As per given pdf size intructions
-            addConstraintsWithFormat("H:|-24-[v0(60)]-32-[v1]|", views: firstNameStaticLabel, firstNameTextField)
-            addConstraintsWithFormat("V:|-20-[v0(16)-20-]", views: firstNameStaticLabel)
+            addConstraintsWithFormat("H:|-24-[v0(60)]-32-[v1]-10-|", views: firstNameStaticLabel, firstNameTextField)
+            addConstraintsWithFormat("V:|-20-[v0(16)]-20-|", views: firstNameStaticLabel)
             addConstraintsWithFormat("V:|[v0(54)]", views: firstNameTextField)
         }
     }
@@ -243,8 +251,8 @@ class GKContactDetailLastNameCell : GKContactDetailCell {
             isUpdatedConstraints = true
             
             //As per given pdf size intructions
-            addConstraintsWithFormat("H:|-24-[v0(60)]-32-[v1]|", views: lastNameStaticLabel, lastNameTextField)
-            addConstraintsWithFormat("V:|-20-[v0(16)-20-]", views: lastNameStaticLabel)
+            addConstraintsWithFormat("H:|-24-[v0(60)]-32-[v1]-10-|", views: lastNameStaticLabel, lastNameTextField)
+            addConstraintsWithFormat("V:|-20-[v0(16)]-20-|", views: lastNameStaticLabel)
             addConstraintsWithFormat("V:|[v0(54)]", views: lastNameTextField)
         }
     }
@@ -266,8 +274,8 @@ class GKContactDetailMobileCell : GKContactDetailCell {
             isUpdatedConstraints = true
             
             //As per given pdf size intructions
-            addConstraintsWithFormat("H:|-24-[v0(60)]-32-[v1]|", views: mobileStaticLabel, mobileTextField)
-            addConstraintsWithFormat("V:|-20-[v0(16)-20-]", views: mobileStaticLabel)
+            addConstraintsWithFormat("H:|-24-[v0(60)]-32-[v1]-10-|", views: mobileStaticLabel, mobileTextField)
+            addConstraintsWithFormat("V:|-20-[v0(16)]-20-|", views: mobileStaticLabel)
             addConstraintsWithFormat("V:|[v0(54)]", views: mobileTextField)
         }
     }
@@ -289,8 +297,8 @@ class GKContactDetailEmailCell : GKContactDetailCell {
             isUpdatedConstraints = true
             
             //As per given pdf size intructions
-            addConstraintsWithFormat("H:|-24-[v0(60)]-32-[v1]|", views: emailStaticLabel, emailTextField)
-            addConstraintsWithFormat("V:|-20-[v0(16)-20-]", views: emailStaticLabel)
+            addConstraintsWithFormat("H:|-24-[v0(60)]-32-[v1]-10-|", views: emailStaticLabel, emailTextField)
+            addConstraintsWithFormat("V:|-20-[v0(16)]-20-|", views: emailStaticLabel)
             addConstraintsWithFormat("V:|[v0(54)]", views: emailTextField)
         }
     }

@@ -14,7 +14,8 @@ class GKContactListCell : GKTableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        backgroundColor = UIColor.init(hex: "#F9F9F9") //Cell background color
+        backgroundColor = UIColor.tableViewBackgroundColor()
+        separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         addSubview(nameLabel)
         addSubview(profileImageView)
         addSubview(favouriteButton)

@@ -27,7 +27,11 @@ extension GKContactListPresenter : GKContactListPresenterProtocol {
     
     func didFetchContacts() {
         GKAPIRequest.contactList({ (response) in
-            self.contactListViewProtocol.updateContactList(response as! [Contact])
+            if let response = response as? [Contact] {
+                self.contactListViewProtocol.updateContactList(response)
+            } else {
+                self.contactListViewProtocol.updateContactList([])
+            }
         }) { (error) in
             self.contactListViewProtocol.didFailedResponse(error)
         }

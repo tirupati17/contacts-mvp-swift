@@ -47,6 +47,10 @@ class GKViewController : GKBasicViewController, UIViewControllerProtocol, Storyb
         }
     }
     
+    func loadData() {
+        self.startViewAnimation()
+    }
+    
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         
     }
