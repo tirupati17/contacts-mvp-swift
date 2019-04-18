@@ -106,6 +106,7 @@ class GKContactDetailCell : GKTableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 17)
         label.textColor = UIColor.navigationTitleColor()
         label.numberOfLines = 1
+        label.textAlignment = .center
         return label
     }()
     
@@ -113,6 +114,7 @@ class GKContactDetailCell : GKTableViewCell {
         let label = UILabel()
         label.text = "First Name"
         label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textAlignment = .right
         label.textColor = UIColor.navigationTitleColor(a: 0.5)
         label.numberOfLines = 1
         return label
@@ -130,6 +132,7 @@ class GKContactDetailCell : GKTableViewCell {
         let label = UILabel()
         label.text = "Last Name"
         label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textAlignment = .right
         label.textColor = UIColor.navigationTitleColor(a: 0.5)
         label.numberOfLines = 1
         return label
@@ -147,6 +150,7 @@ class GKContactDetailCell : GKTableViewCell {
         let label = UILabel()
         label.text = "mobile"
         label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textAlignment = .right
         label.textColor = UIColor.navigationTitleColor(a: 0.5)
         label.numberOfLines = 1
         return label
@@ -164,6 +168,7 @@ class GKContactDetailCell : GKTableViewCell {
         let label = UILabel()
         label.text = "email"
         label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textAlignment = .right
         label.textColor = UIColor.navigationTitleColor(a: 0.5)
         label.numberOfLines = 1
         return label
@@ -211,11 +216,12 @@ class GKContactDetailHeaderCell : GKContactDetailCell {
         
         profileImageView.layer.cornerRadius = profileImageView.frame.size.height/2
 
+        _ = contentView.layer.sublayers?.popLast()
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = bounds
         gradientLayer.colors = [UIColor.white.cgColor, UIColor.init(hex: "#CAF7ED")!.cgColor]
         gradientLayer.opacity = 0.55
-        layer.insertSublayer(gradientLayer, at: 0)
+        contentView.layer.addSublayer(gradientLayer)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -225,32 +231,23 @@ class GKContactDetailHeaderCell : GKContactDetailCell {
     func setupConstraints() {
         if (isUpdatedConstraints == false) {
             isUpdatedConstraints = true
-            
-            //Need to improve below code
-            var constraints = NSLayoutConstraint.constraints(
-                withVisualFormat: "V:[superview]-(<=1)-[profileImageView(124)]",
-                options: NSLayoutConstraint.FormatOptions.alignAllCenterX,
-                metrics: nil,
-                views: ["superview":self, "profileImageView":profileImageView]) //Align profileImageView center
-            addConstraints(constraints)
-            
-            constraints = NSLayoutConstraint.constraints(
-                withVisualFormat: "V:[superview]-(<=1)-[nameLabel]",
-                options: NSLayoutConstraint.FormatOptions.alignAllCenterX,
-                metrics: nil,
-                views: ["superview":self, "nameLabel":nameLabel]) //Align nameLabel center
-            addConstraints(constraints)
+            let screenWidth = UIScreen.main.bounds.width
 
+            //WTF! Need to improve below code
+            var xCenter = (screenWidth/2) - 62 // 124/2 = 62
+            addConstraintsWithFormat("H:|-\(xCenter)-[v0(124)]", views: profileImageView)
             addConstraintsWithFormat("V:|-84-[v0(124)]", views: profileImageView)
+
+            xCenter = (screenWidth/2) - 100 // 200/2 = 100
+            addConstraintsWithFormat("H:|-\(xCenter)-[v0(200)]", views: nameLabel)
             addConstraintsWithFormat("V:|-212-[v0(24)]", views: nameLabel) //84 + 120 + 8 = 212
             
-            let screenWidth = UIScreen.main.bounds.width
             let distance = ((screenWidth - (44 * 4)) - 88)/3
             addConstraintsWithFormat("H:|-44-[v0(44)]-\(distance)-[v1(44)]-\(distance)-[v2(44)]-\(distance)-[v3(44)]-44-|", views: messageButton, callButton, emailButton, favouriteButton)
             addConstraintsWithFormat("V:|-260-[v0(44)]", views: messageButton) //212 + 24 + 24 = 260
-            addConstraintsWithFormat("V:|-260-[v0(44)]", views: callButton) //212 + 24 + 24 = 260
-            addConstraintsWithFormat("V:|-260-[v0(44)]", views: emailButton) //212 + 24 + 24 = 260
-            addConstraintsWithFormat("V:|-260-[v0(44)]", views: favouriteButton) //212 + 24 + 24 = 260
+            addConstraintsWithFormat("V:|-260-[v0(44)]", views: callButton)
+            addConstraintsWithFormat("V:|-260-[v0(44)]", views: emailButton)
+            addConstraintsWithFormat("V:|-260-[v0(44)]", views: favouriteButton)
 
         }
     }
@@ -271,7 +268,7 @@ class GKContactDetailFirstNameCell : GKContactDetailCell {
             isUpdatedConstraints = true
             
             //As per given pdf size intructions
-            addConstraintsWithFormat("H:|-24-[v0(60)]-32-[v1]-10-|", views: firstNameStaticLabel, firstNameTextField)
+            addConstraintsWithFormat("H:|-24-[v0(100)]-32-[v1]-10-|", views: firstNameStaticLabel, firstNameTextField)
             addConstraintsWithFormat("V:|-20-[v0(16)]-20-|", views: firstNameStaticLabel)
             addConstraintsWithFormat("V:|[v0(54)]", views: firstNameTextField)
         }
@@ -294,7 +291,7 @@ class GKContactDetailLastNameCell : GKContactDetailCell {
             isUpdatedConstraints = true
             
             //As per given pdf size intructions
-            addConstraintsWithFormat("H:|-24-[v0(60)]-32-[v1]-10-|", views: lastNameStaticLabel, lastNameTextField)
+            addConstraintsWithFormat("H:|-24-[v0(100)]-32-[v1]-10-|", views: lastNameStaticLabel, lastNameTextField)
             addConstraintsWithFormat("V:|-20-[v0(16)]-20-|", views: lastNameStaticLabel)
             addConstraintsWithFormat("V:|[v0(54)]", views: lastNameTextField)
         }
@@ -317,7 +314,7 @@ class GKContactDetailMobileCell : GKContactDetailCell {
             isUpdatedConstraints = true
             
             //As per given pdf size intructions
-            addConstraintsWithFormat("H:|-24-[v0(60)]-32-[v1]-10-|", views: mobileStaticLabel, mobileTextField)
+            addConstraintsWithFormat("H:|-24-[v0(100)]-32-[v1]-10-|", views: mobileStaticLabel, mobileTextField)
             addConstraintsWithFormat("V:|-20-[v0(16)]-20-|", views: mobileStaticLabel)
             addConstraintsWithFormat("V:|[v0(54)]", views: mobileTextField)
         }
@@ -340,7 +337,7 @@ class GKContactDetailEmailCell : GKContactDetailCell {
             isUpdatedConstraints = true
             
             //As per given pdf size intructions
-            addConstraintsWithFormat("H:|-24-[v0(60)]-32-[v1]-10-|", views: emailStaticLabel, emailTextField)
+            addConstraintsWithFormat("H:|-24-[v0(100)]-32-[v1]-10-|", views: emailStaticLabel, emailTextField)
             addConstraintsWithFormat("V:|-20-[v0(16)]-20-|", views: emailStaticLabel)
             addConstraintsWithFormat("V:|[v0(54)]", views: emailTextField)
         }

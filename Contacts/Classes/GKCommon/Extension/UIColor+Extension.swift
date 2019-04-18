@@ -46,7 +46,7 @@ extension UIColor {
 
     
     public convenience init?(hex: String, a : CGFloat? = 1.0) {
-        let r, g, b, a: CGFloat
+        let r, g, b, alpha: CGFloat
         
         if hex.hasPrefix("#") {
             let start = hex.index(hex.startIndex, offsetBy: 1)
@@ -60,9 +60,9 @@ extension UIColor {
                     r = CGFloat((hexNumber & 0xff0000) >> 16) / 255
                     g = CGFloat((hexNumber & 0xff00) >> 8) / 255
                     b = CGFloat((hexNumber & 0xff) >> 0) / 255
-                    a = 1.0
+                    alpha = a!
                     
-                    self.init(red: r, green: g, blue: b, alpha: a)
+                    self.init(red: r, green: g, blue: b, alpha: alpha)
                     return
                 }
             }

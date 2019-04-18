@@ -15,11 +15,18 @@ let contactDetailLastNameCellId = "GKContactDetailLastNameCellId"
 let contactDetailMobileCellId = "GKContactDetailMobileCellId"
 let contactDetailEmailCellId = "GKContactDetailEmailCellId"
 
+enum ViewMode {
+    case add
+    case edit
+    case view
+}
+
 class GKContactDetailView : GKViewController {
     var tableView : UITableView!
     var contactDetailPresenterProtocol : GKContactDetailPresenterProtocol!
     var contact : Contact!
-    var isUpdatedConstraints: Bool? = false
+    var isUpdatedConstraints : Bool? = false
+    var viewMode : ViewMode = .view
     
     override func loadView() {
         super.loadView()
@@ -31,6 +38,8 @@ class GKContactDetailView : GKViewController {
         tableView.register(GKContactDetailHeaderCell.self, forCellReuseIdentifier: contactDetailHeaderCellId)
         tableView.register(GKContactDetailMobileCell.self, forCellReuseIdentifier: contactDetailMobileCellId)
         tableView.register(GKContactDetailEmailCell.self, forCellReuseIdentifier: contactDetailEmailCellId)
+        tableView.register(GKContactDetailFirstNameCell.self, forCellReuseIdentifier: contactDetailFirstNameCellId)
+        tableView.register(GKContactDetailLastNameCell.self, forCellReuseIdentifier: contactDetailLastNameCellId)
 
         tableView.separatorColor = UIColor.tableViewSeparatorLineColor()
         tableView.sectionIndexColor = .darkGray
@@ -104,7 +113,18 @@ class GKContactDetailView : GKViewController {
     }
     
     @objc func editContact() {
-        
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .cancel, target: self, action: #selector(cancelEdit))
+
+        self.viewMode = .edit
+        self.tableView.reloadData()
+        self.tableView.layoutIfNeeded()
+    }
+    
+    @objc func cancelEdit() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .edit, target: self, action: #selector(editContact))
+        self.viewMode = .view
+        self.tableView.reloadData()
+        self.tableView.layoutIfNeeded()
     }
 }
 
@@ -129,16 +149,32 @@ extension GKContactDetailView : UITableViewDelegate {
 
 extension GKContactDetailView : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        switch self.viewMode {
+            case .add, .edit:
+                return 5
+            default:
+                return 3
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.row {
-            case 0:
-                return 334
+        switch self.viewMode {
+            case .add, .edit:
+                switch indexPath.row {
+                    case 0:
+                        return 250
+                    default:
+                        return 56
+                }
             default:
-                return 56
+                switch indexPath.row {
+                    case 0:
+                        return 334
+                    default:
+                        return 56
+                }
         }
+
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -146,6 +182,13 @@ extension GKContactDetailView : UITableViewDataSource {
             case 0:
                 if let cell = tableView.dequeueReusableCell(withIdentifier: contactDetailHeaderCellId) as? GKContactDetailHeaderCell {
                     cell.controller = self
+                    cell.emailButton.isHidden = (self.viewMode == .edit || self.viewMode == .add)
+                    cell.callButton.isHidden = (self.viewMode == .edit || self.viewMode == .add)
+                    cell.messageButton.isHidden = (self.viewMode == .edit || self.viewMode == .add)
+                    cell.favouriteButton.isHidden = (self.viewMode == .edit || self.viewMode == .add)
+                    
+                    cell.cameraButton.isHidden = !(self.viewMode == .edit || self.viewMode == .add)
+                    cell.layoutIfNeeded()
                     if let contact = self.contact {
                         cell.contact = contact
                     }
@@ -155,6 +198,7 @@ extension GKContactDetailView : UITableViewDataSource {
             case 1:
                 if let cell = tableView.dequeueReusableCell(withIdentifier: contactDetailMobileCellId) as? GKContactDetailMobileCell {
                     cell.controller = self
+                    cell.mobileTextField.isUserInteractionEnabled = (self.viewMode == .edit || self.viewMode == .add)
                     if let contact = self.contact {
                         cell.contact = contact
                     }
@@ -164,6 +208,27 @@ extension GKContactDetailView : UITableViewDataSource {
             case 2:
                 if let cell = tableView.dequeueReusableCell(withIdentifier: contactDetailEmailCellId) as? GKContactDetailEmailCell {
                     cell.controller = self
+                    cell.emailTextField.isUserInteractionEnabled = (self.viewMode == .edit || self.viewMode == .add)
+                    if let contact = self.contact {
+                        cell.contact = contact
+                    }
+                    return cell
+                }
+                break
+            case 3:
+                if let cell = tableView.dequeueReusableCell(withIdentifier: contactDetailFirstNameCellId) as? GKContactDetailFirstNameCell {
+                    cell.controller = self
+                    cell.firstNameTextField.isUserInteractionEnabled = true
+                    if let contact = self.contact {
+                        cell.contact = contact
+                    }
+                    return cell
+                }
+                break
+            case 4:
+                if let cell = tableView.dequeueReusableCell(withIdentifier: contactDetailLastNameCellId) as? GKContactDetailLastNameCell {
+                    cell.controller = self
+                    cell.lastNameTextField.isUserInteractionEnabled = true
                     if let contact = self.contact {
                         cell.contact = contact
                     }

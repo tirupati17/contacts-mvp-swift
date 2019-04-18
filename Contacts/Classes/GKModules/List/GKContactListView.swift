@@ -32,6 +32,7 @@ class GKContactListView : GKViewController {
         tableView.backgroundColor = UIColor.tableViewBackgroundColor()
         tableView.sectionIndexColor = .darkGray
         tableView.sectionIndexBackgroundColor = .clear
+        tableView.refreshControl = self.refreshControl
         
         view.addSubview(tableView)
         
@@ -43,6 +44,7 @@ class GKContactListView : GKViewController {
         navigationItem.title = "Contact"
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addContact))
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(title: "Groups", style: .plain, target: self, action: #selector(groupAction))
+        loadData()
     }
     
     func configureDependencies() {
@@ -62,7 +64,6 @@ class GKContactListView : GKViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,7 +75,7 @@ class GKContactListView : GKViewController {
     }
     
     override func handleRefresh(_ refreshControl: UIRefreshControl) {
-        loadData()
+        self.contactListPresenterProtocol.didFetchContacts()
     }
     
     override func loadData() {
