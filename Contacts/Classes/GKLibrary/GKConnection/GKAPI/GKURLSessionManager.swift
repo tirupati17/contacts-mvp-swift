@@ -57,13 +57,10 @@ class GKURLSessionManager : URLSession {
         case GKRequestMethod.RequestMethodPost?:
             request.httpMethod = "POST"
             request.setValue(apiRequest.contentType, forHTTPHeaderField: "Content-Type")
-            let bodyData = self.createBody(parameters: apiRequest.params,
-                                           boundary: apiRequest.boundary,
-                                           requestType: apiRequest.requestType!,
-                                           data: apiRequest.data,
-                                           mimeType: apiRequest.mimeType,
-                                           filename: apiRequest.fileName)
-            request.httpBody = bodyData
+            if let httpBody = try? JSONSerialization.data(withJSONObject: apiRequest.params, options: [])  {
+                request.httpBody = httpBody
+            }
+            
             sessionTask = GKURLSessionManager.defaultSharedInstance.dataTask(with: request, completionHandler: { (data, response, error) in
                 self.responseHandle(data: data, response: response, error: error, success: success, failure: failure)
             })
@@ -72,13 +69,10 @@ class GKURLSessionManager : URLSession {
         case GKRequestMethod.RequestMethodPut?:
             request.httpMethod = "PUT"
             request.setValue(apiRequest.contentType, forHTTPHeaderField: "Content-Type")
-            let bodyData = self.createBody(parameters: apiRequest.params,
-                                           boundary: apiRequest.boundary,
-                                           requestType: apiRequest.requestType!,
-                                           data: apiRequest.data,
-                                           mimeType: apiRequest.mimeType,
-                                           filename: apiRequest.fileName)
-            request.httpBody = bodyData
+            
+            if let httpBody = try? JSONSerialization.data(withJSONObject: apiRequest.params, options: [])  {
+                request.httpBody = httpBody
+            }
             sessionTask = GKURLSessionManager.defaultSharedInstance.dataTask(with: request, completionHandler: { (data, response, error) in
                 self.responseHandle(data: data, response: response, error: error, success: success, failure: failure)
             })
@@ -109,32 +103,37 @@ class GKURLSessionManager : URLSession {
             failure(error)
             return
         }
-        
+        var responseError = ResponseError(errors: [])
         if let mimeType = response.mimeType,
             mimeType == "application/json",
             let data = data,
-            let dataString = String(data: data, encoding: .utf8) {
-            //GKLogger.log("\(dataString)")
+            let _ = String(data: data, encoding: .utf8) {
+            do {
+                responseError = try JSONDecoder().decode(ResponseError.self, from: data)
+            } catch {
+                //print(error)
+                //print(dataString)
+            }
         }
-        
+        let customMessage = responseError.errors?.count ?? 0 >= 1 ? responseError.errors?[0] : ""
         switch (response.statusCode) {
             case 200...299:
                 success(data as JSON)
                 break
             case 404:
-                let error: LocalizedDescriptionError = GKError.customError(message: "Not Found")
+                let error: LocalizedDescriptionError = GKError.customError(message: customMessage ?? "Not Found")
                 failure(error)
                 break
             case 422:
-                let error: LocalizedDescriptionError = GKError.customError(message: "Validation Errors")
+                let error: LocalizedDescriptionError = GKError.customError(message: customMessage ?? "Validation Errors")
                 failure(error)
                 break
             case 500:
-                let error: LocalizedDescriptionError = GKError.customError(message: "Internal Server Error")
+                let error: LocalizedDescriptionError = GKError.customError(message: customMessage ?? "Internal Server Error")
                 failure(error)
                 break
             default:
-                let error: LocalizedDescriptionError = GKError.customError(message: "Invalid status code")
+                let error: LocalizedDescriptionError = GKError.customError(message: customMessage ?? "Invalid status code")
                 failure(error)
         }
     }

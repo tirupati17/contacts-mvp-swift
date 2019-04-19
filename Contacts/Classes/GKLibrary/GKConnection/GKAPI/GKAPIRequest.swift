@@ -14,7 +14,7 @@ typealias JSONArray = Array<JSON>
 class GKAPIRequest {
     var urlString: String?
     
-    var contentType: String = ""
+    var contentType: String = "application/json"
     var mimeType: String = ""
     var fileName: String = ""
     var boundary: String = ""

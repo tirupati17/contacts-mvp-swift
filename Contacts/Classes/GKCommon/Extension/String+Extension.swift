@@ -17,13 +17,13 @@ extension String {
         return email.evaluate(with: self)
     }
 
-    func isValidPhoneNumber() -> Bool{
+    func isValidPhoneNumber() -> Bool {
         let phoneRegex = "^[0-9+]{0,1}+[0-9]{5,16}$"
         let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
         return phoneTest.evaluate(with: self)
     }
     
-    func isValidName() -> Bool{
+    func isValidName() -> Bool {
         let regex = try? NSRegularExpression(pattern: "^[\\p{L}\\.]{2,30}(?: [\\p{L}\\.]{2,30}){0,2}$", options: .caseInsensitive)
         
         return regex?.firstMatch(in: self, options: [], range: NSMakeRange(0, self.count)) != nil

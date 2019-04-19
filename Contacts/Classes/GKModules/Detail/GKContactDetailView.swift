@@ -150,8 +150,20 @@ class GKContactDetailView : GKViewController {
     }
     
     @objc func addContact() {
-        self.startViewAnimation()
         if let contact = self.contact {
+            if let firstName = contact.firstName, firstName.count == 0 {
+                self.showAlertWithTitleAndMessage(title: "Validation Error!", message: "First name field can not be blank.")
+                return
+            }
+            if let lastName = contact.lastName, lastName.count == 0 {
+                self.showAlertWithTitleAndMessage(title: "Validation Error!", message: "Last name field can not be blank.")
+                return
+            }
+            if let email = contact.email, email.isValidEmail() == false {
+                self.showAlertWithTitleAndMessage(title: "Validation Error!", message: "Invalid email id.")
+                return
+            }
+            self.startViewAnimation()
             self.contactDetailPresenterProtocol.didCreateContact(forContact: contact)
         }
     }
@@ -170,17 +182,24 @@ class GKContactDetailView : GKViewController {
     
     @objc func cameraAction(_ cell : GKContactDetailCell) {
         contactDetailCell = cell
-        let imagePicker = UIImagePickerController()
-        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
-            imagePicker.delegate = self
-            imagePicker.sourceType = .savedPhotosAlbum
-            imagePicker.allowsEditing = false
-            present(imagePicker, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            let imagePicker = UIImagePickerController()
+            if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+                imagePicker.delegate = self
+                imagePicker.sourceType = .savedPhotosAlbum
+                imagePicker.allowsEditing = false
+                self.present(imagePicker, animated: true, completion: nil)
+            }
         }
     }
     
     @objc func favouriteAction(_ cell : GKContactDetailCell) {
-        
+        if let contact = cell.contact {
+            self.contactDetailPresenterProtocol.didUpdateContact(forContact: contact)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     @objc func callAction(_ cell : GKContactDetailCell) {
@@ -303,6 +322,7 @@ extension GKContactDetailView : UITableViewDataSource {
                     cell.controller = self
                     cell.mobileTextField.isUserInteractionEnabled = (self.viewMode == .edit || self.viewMode == .add)
                     cell.mobileTextField.delegate = self
+                    cell.mobileTextField.keyboardType = .numbersAndPunctuation
                     if let contact = self.contact {
                         cell.contact = contact
                     }
@@ -314,6 +334,8 @@ extension GKContactDetailView : UITableViewDataSource {
                     cell.controller = self
                     cell.emailTextField.isUserInteractionEnabled = (self.viewMode == .edit || self.viewMode == .add)
                     cell.emailTextField.delegate = self
+                    cell.mobileTextField.autocapitalizationType = .none
+                    cell.mobileTextField.keyboardType = .emailAddress
                     if let contact = self.contact {
                         cell.contact = contact
                     }
@@ -361,34 +383,22 @@ extension GKContactDetailView : UITextFieldDelegate {
             let updatedText = text.replacingCharacters(in: range, with: string)
             switch textField.tag {
                 case TextFieldTag.emailFieldTag.rawValue:
-                    if updatedText.isValidEmail() {
-                        self.contact.email = updatedText
-                        return true
-                    }
+                    self.contact.email = updatedText
                     break
                 case TextFieldTag.phoneNumberFieldTag.rawValue:
-                    if updatedText.isValidPhoneNumber() {
-                        self.contact.phoneNumber = updatedText
-                        return true
-                    }
+                    self.contact.phoneNumber = updatedText
                     break
                 case TextFieldTag.firstNameFieldTag.rawValue:
-                    if updatedText.isValidName() {
-                        self.contact.firstName = updatedText
-                        return true
-                    }
+                    self.contact.firstName = updatedText
                     break
                 case TextFieldTag.lastNameFieldTag.rawValue:
-                    if updatedText.isValidName() {
-                        self.contact.lastName = updatedText
-                        return true
-                    }
+                    self.contact.lastName = updatedText
                     break
-                default:
+            default:
                     break
             }
         }
-        return false
+        return true
     }
 
 }

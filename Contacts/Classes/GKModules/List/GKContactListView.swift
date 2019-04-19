@@ -44,7 +44,7 @@ class GKContactListView : GKViewController {
         navigationItem.title = "Contact"
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addContact))
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(title: "Groups", style: .plain, target: self, action: #selector(groupAction))
-        loadData()
+        super.loadData()
     }
     
     func configureDependencies() {
@@ -64,6 +64,7 @@ class GKContactListView : GKViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.contactListPresenterProtocol.didFetchContacts()
     }
     
     override func didReceiveMemoryWarning() {
@@ -78,7 +79,7 @@ class GKContactListView : GKViewController {
         self.contactListPresenterProtocol.didFetchContacts()
     }
     
-    override func loadData() {
+    override func loadData() { //load with activity indicator
         super.loadData()
         self.contactListPresenterProtocol.didFetchContacts()
     }
@@ -105,7 +106,7 @@ class GKContactListView : GKViewController {
 
 extension GKContactListView : DismissProtocol {
     func dismiss(_ sender : Any) { //Load data after contact add
-        self.loadData()
+
     }
 }
 

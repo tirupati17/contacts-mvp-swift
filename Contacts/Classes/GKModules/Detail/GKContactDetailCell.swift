@@ -206,6 +206,9 @@ class GKContactDetailCell : GKTableViewCell {
                     controller.cameraAction(self)
                     break
                 case ButtonTag.favouriteButtonTag.rawValue:
+                    if let contact = self.contact {
+                        self.contact?.favorite = !(contact.favorite)
+                    }
                     controller.favouriteAction(self)
                     break
                 case ButtonTag.callButtonTag.rawValue:

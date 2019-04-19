@@ -7,6 +7,13 @@
 //
 
 
+struct ResponseError: Codable {
+    let errors: [String]?
+    enum CodingKeys: String, CodingKey {
+        case errors
+    }
+}
+
 struct Contact: Codable {
     let id: Int
     var firstName, lastName, email, phoneNumber: String?
