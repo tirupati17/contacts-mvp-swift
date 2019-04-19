@@ -32,7 +32,7 @@ extension GKContactDetailPresenter : GKContactDetailPresenterProtocol {
     
     func didCreateContact(forContact : Contact) {
         GKAPIRequest.contactCreate(forContact.dictionary ?? [:], success: { (response) in
-            self.contactDetailViewProtocol.updateContactDetail(response as? Contact)
+            self.contactDetailViewProtocol.didSuccessfulResponse(response as? Contact)
         }) { (error) in
             self.contactDetailViewProtocol.didFailedResponse(error)
         }

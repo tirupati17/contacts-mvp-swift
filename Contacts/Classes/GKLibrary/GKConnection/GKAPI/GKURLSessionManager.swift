@@ -60,7 +60,7 @@ class GKURLSessionManager : URLSession {
             let bodyData = self.createBody(parameters: apiRequest.params,
                                            boundary: apiRequest.boundary,
                                            requestType: apiRequest.requestType!,
-                                           data: apiRequest.data!,
+                                           data: apiRequest.data,
                                            mimeType: apiRequest.mimeType,
                                            filename: apiRequest.fileName)
             request.httpBody = bodyData
@@ -71,11 +71,25 @@ class GKURLSessionManager : URLSession {
             break
         case GKRequestMethod.RequestMethodPut?:
             request.httpMethod = "PUT"
-            
+            request.setValue(apiRequest.contentType, forHTTPHeaderField: "Content-Type")
+            let bodyData = self.createBody(parameters: apiRequest.params,
+                                           boundary: apiRequest.boundary,
+                                           requestType: apiRequest.requestType!,
+                                           data: apiRequest.data,
+                                           mimeType: apiRequest.mimeType,
+                                           filename: apiRequest.fileName)
+            request.httpBody = bodyData
+            sessionTask = GKURLSessionManager.defaultSharedInstance.dataTask(with: request, completionHandler: { (data, response, error) in
+                self.responseHandle(data: data, response: response, error: error, success: success, failure: failure)
+            })
+            sessionTask.resume()
             break
         case GKRequestMethod.RequestMethodDelete?:
             request.httpMethod = "DELETE"
-            
+            sessionTask = GKURLSessionManager.defaultSharedInstance.dataTask(with: request, completionHandler: { (data, response, error) in
+                self.responseHandle(data: data, response: response, error: error, success: success, failure: failure)
+            })
+            sessionTask.resume()
             break
         default:
             break
@@ -159,9 +173,9 @@ class GKURLSessionManager : URLSession {
     class func createBody(parameters: [String: Any],
                           boundary: String,
                           requestType: GKAPIRequestType,
-                          data: Data,
-                          mimeType: String,
-                          filename: String) -> Data {
+                          data: Data?,
+                          mimeType: String?,
+                          filename: String?) -> Data {
         let body = NSMutableData()
         let boundaryPrefix = "--\(boundary)\r\n"
         
@@ -172,10 +186,15 @@ class GKURLSessionManager : URLSession {
         }
         
         body.appendString(boundaryPrefix)
-        body.appendString("Content-Disposition: form-data; name=\"zipMultipartFile\"; filename=\"\(filename)\"\r\n")
-        
-        body.appendString("Content-Type: \(mimeType)\r\n\r\n")
-        body.append(data)
+        if let filename = filename {
+            body.appendString("Content-Disposition: form-data; name=\"zipMultipartFile\"; filename=\"\(filename)\"\r\n")
+        }
+        if let mimeType = mimeType {
+            body.appendString("Content-Type: \(mimeType)\r\n\r\n")
+        }
+        if let data = data {
+            body.append(data)
+        }
         body.appendString("\r\n")
         body.appendString("--".appending(boundary.appending("--\r\n")))
         

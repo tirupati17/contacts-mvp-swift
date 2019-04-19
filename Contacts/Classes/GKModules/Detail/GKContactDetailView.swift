@@ -27,6 +27,7 @@ class GKContactDetailView : GKViewController {
     var contact : Contact!
     var isUpdatedConstraints : Bool? = false
     var viewMode : ViewMode = .view
+    var contactDetailCell : GKContactDetailCell? = nil
     
     override func loadView() {
         super.loadView()
@@ -53,11 +54,25 @@ class GKContactDetailView : GKViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController!.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = false
+        if let nv = navigationController {
+            nv.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            nv.navigationBar.shadowImage = UIImage()
+            nv.navigationBar.isTranslucent = false
+        }
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .edit, target: self, action: #selector(editContact))
+        switch self.viewMode {
+            case .add:
+                navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAdd))
+                navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .save, target: self, action: #selector(addContact))
+                
+                self.contact = Contact(id: 0, firstName: "", lastName: "", email: "", phoneNumber: "", profilePic: "", favorite: false, createdAt: "", updatedAt: "")
+                self.viewMode = .add
+                break
+            default:
+                navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .edit, target: self, action: #selector(editContact))
+                loadData()
+                break
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -82,9 +97,6 @@ class GKContactDetailView : GKViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.startViewAnimation()
-        
-        loadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -109,22 +121,113 @@ class GKContactDetailView : GKViewController {
     
     override func loadData() {
         super.loadData()
-        self.contactDetailPresenterProtocol.didFetchContactDetail(self.contact.id.toString())
+        if let contact = self.contact {
+            self.contactDetailPresenterProtocol.didFetchContactDetail(contact.id.toString())
+        }
     }
     
     @objc func editContact() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .cancel, target: self, action: #selector(cancelEdit))
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .cancel, target: self, action: #selector(cancelEdit))
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .done, target: self, action: #selector(doneEdit))
 
         self.viewMode = .edit
         self.tableView.reloadData()
         self.tableView.layoutIfNeeded()
     }
     
+    @objc func doneEdit() {
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .edit, target: self, action: #selector(editContact))
+
+        self.viewMode = .view
+        self.tableView.reloadData()
+        self.tableView.layoutIfNeeded()
+        
+        self.startViewAnimation()
+        if let contact = self.contact {
+            self.contactDetailPresenterProtocol.didUpdateContact(forContact: contact)
+        }
+    }
+    
+    @objc func addContact() {
+        self.startViewAnimation()
+        if let contact = self.contact {
+            self.contactDetailPresenterProtocol.didCreateContact(forContact: contact)
+        }
+    }
+    
+    @objc func cancelAdd() {
+        self.dismissSelf()
+    }
+    
     @objc func cancelEdit() {
+        navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .edit, target: self, action: #selector(editContact))
         self.viewMode = .view
         self.tableView.reloadData()
         self.tableView.layoutIfNeeded()
+    }
+    
+    @objc func cameraAction(_ cell : GKContactDetailCell) {
+        contactDetailCell = cell
+        let imagePicker = UIImagePickerController()
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+            imagePicker.delegate = self
+            imagePicker.sourceType = .savedPhotosAlbum
+            imagePicker.allowsEditing = false
+            present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func favouriteAction(_ cell : GKContactDetailCell) {
+        
+    }
+    
+    @objc func callAction(_ cell : GKContactDetailCell) {
+        if let contact = cell.contact {
+            if let url = URL(string: "tel://\(contact.phoneNumber ?? "")") {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+        }
+    }
+    
+    @objc func emailAction(_ cell : GKContactDetailCell) {
+        if let contact = cell.contact {
+            if let url = URL(string: "mailto:\(contact.email ?? "")") {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    }
+    
+    @objc func messageAction(_ cell : GKContactDetailCell) {
+        if let contact = cell.contact {
+            if let url = URL(string: "sms:\(contact.phoneNumber ?? "")") {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    }
+    
+    override func didSuccessfulResponse<T>(_ response : T) {
+        self.dismissSelf() //Contact successfully added
+    }
+}
+
+extension GKContactDetailView : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage {
+            DispatchQueue.main.async {
+                if let cell = self.contactDetailCell {
+                    cell.profileImageView.image = image
+                }
+            }
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!){
+
     }
 }
 
@@ -145,7 +248,6 @@ extension GKContactDetailView : UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-
 
 extension GKContactDetailView : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -182,6 +284,7 @@ extension GKContactDetailView : UITableViewDataSource {
             case 0:
                 if let cell = tableView.dequeueReusableCell(withIdentifier: contactDetailHeaderCellId) as? GKContactDetailHeaderCell {
                     cell.controller = self
+                    cell.cameraButton.isHidden = (self.viewMode == .view)
                     cell.emailButton.isHidden = (self.viewMode == .edit || self.viewMode == .add)
                     cell.callButton.isHidden = (self.viewMode == .edit || self.viewMode == .add)
                     cell.messageButton.isHidden = (self.viewMode == .edit || self.viewMode == .add)
@@ -199,6 +302,7 @@ extension GKContactDetailView : UITableViewDataSource {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: contactDetailMobileCellId) as? GKContactDetailMobileCell {
                     cell.controller = self
                     cell.mobileTextField.isUserInteractionEnabled = (self.viewMode == .edit || self.viewMode == .add)
+                    cell.mobileTextField.delegate = self
                     if let contact = self.contact {
                         cell.contact = contact
                     }
@@ -209,6 +313,7 @@ extension GKContactDetailView : UITableViewDataSource {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: contactDetailEmailCellId) as? GKContactDetailEmailCell {
                     cell.controller = self
                     cell.emailTextField.isUserInteractionEnabled = (self.viewMode == .edit || self.viewMode == .add)
+                    cell.emailTextField.delegate = self
                     if let contact = self.contact {
                         cell.contact = contact
                     }
@@ -219,6 +324,7 @@ extension GKContactDetailView : UITableViewDataSource {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: contactDetailFirstNameCellId) as? GKContactDetailFirstNameCell {
                     cell.controller = self
                     cell.firstNameTextField.isUserInteractionEnabled = true
+                    cell.firstNameTextField.delegate = self
                     if let contact = self.contact {
                         cell.contact = contact
                     }
@@ -229,6 +335,7 @@ extension GKContactDetailView : UITableViewDataSource {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: contactDetailLastNameCellId) as? GKContactDetailLastNameCell {
                     cell.controller = self
                     cell.lastNameTextField.isUserInteractionEnabled = true
+                    cell.lastNameTextField.delegate = self
                     if let contact = self.contact {
                         cell.contact = contact
                     }
@@ -240,5 +347,49 @@ extension GKContactDetailView : UITableViewDataSource {
         }
         return GKContactDetailCell.init(style: .default, reuseIdentifier: contactDetailCellId)
     }
-    
+
 }
+
+extension GKContactDetailView : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text, let range = Range.init(range, in: text) {
+            let updatedText = text.replacingCharacters(in: range, with: string)
+            switch textField.tag {
+                case TextFieldTag.emailFieldTag.rawValue:
+                    if updatedText.isValidEmail() {
+                        self.contact.email = updatedText
+                        return true
+                    }
+                    break
+                case TextFieldTag.phoneNumberFieldTag.rawValue:
+                    if updatedText.isValidPhoneNumber() {
+                        self.contact.phoneNumber = updatedText
+                        return true
+                    }
+                    break
+                case TextFieldTag.firstNameFieldTag.rawValue:
+                    if updatedText.isValidName() {
+                        self.contact.firstName = updatedText
+                        return true
+                    }
+                    break
+                case TextFieldTag.lastNameFieldTag.rawValue:
+                    if updatedText.isValidName() {
+                        self.contact.lastName = updatedText
+                        return true
+                    }
+                    break
+                default:
+                    break
+            }
+        }
+        return false
+    }
+
+}
+

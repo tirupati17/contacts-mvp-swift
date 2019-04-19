@@ -8,6 +8,23 @@
 
 import Foundation
 
+enum ButtonTag : Int {
+    case messageButtonTag = 1
+    case cameraButtonTag = 2
+    case callButtonTag = 3
+    case emailButtonTag = 4
+    case favouriteButtonTag = 5
+    case undefinedTag = 0
+}
+
+enum TextFieldTag : Int {
+    case firstNameFieldTag = 1
+    case lastNameFieldTag = 2
+    case emailFieldTag = 3
+    case phoneNumberFieldTag = 4
+    case undefinedTag = 0
+}
+
 class GKContactDetailCell : GKTableViewCell {
     var controller: GKContactDetailView?
     var isUpdatedConstraints: Bool? = false
@@ -17,7 +34,6 @@ class GKContactDetailCell : GKTableViewCell {
         
         addSubview(nameLabel)
         addSubview(messageButton)
-        addSubview(cameraButton)
         addSubview(callButton)
         addSubview(emailButton)
         addSubview(favouriteButton)
@@ -30,36 +46,17 @@ class GKContactDetailCell : GKTableViewCell {
         addSubview(mobileTextField)
         addSubview(emailTextField)
         addSubview(profileImageView)
+        addSubview(cameraButton)
 
-        messageButton.addTarget(self, action: #selector(messageAction), for: .touchUpInside)
-        cameraButton.addTarget(self, action: #selector(cameraAction), for: .touchUpInside)
-        callButton.addTarget(self, action: #selector(callAction), for: .touchUpInside)
-        emailButton.addTarget(self, action: #selector(emailAction), for: .touchUpInside)
-        favouriteButton.addTarget(self, action: #selector(favouriteAction), for: .touchUpInside)
+        cameraButton.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+        messageButton.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+        callButton.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+        emailButton.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+        favouriteButton.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    @objc func cameraAction() {
-        
-    }
-
-    @objc func favouriteAction() {
-        
-    }
-    
-    @objc func callAction() {
-        
-    }
-    
-    @objc func emailAction() {
-        
-    }
-    
-    @objc func messageAction() {
-        
     }
     
     var contact : Contact? {
@@ -123,6 +120,7 @@ class GKContactDetailCell : GKTableViewCell {
     let firstNameTextField: UITextField = {
         let textField = UITextField()
         textField.font = UIFont.boldSystemFont(ofSize: 16)
+        textField.tag = TextFieldTag.firstNameFieldTag.rawValue
         textField.textColor = UIColor.navigationTitleColor(a: 1.0)
         textField.isUserInteractionEnabled = false
         return textField
@@ -141,6 +139,7 @@ class GKContactDetailCell : GKTableViewCell {
     let lastNameTextField: UITextField = {
         let textField = UITextField()
         textField.font = UIFont.boldSystemFont(ofSize: 16)
+        textField.tag = TextFieldTag.lastNameFieldTag.rawValue
         textField.textColor = UIColor.navigationTitleColor(a: 1.0)
         textField.isUserInteractionEnabled = false
         return textField
@@ -159,6 +158,7 @@ class GKContactDetailCell : GKTableViewCell {
     let mobileTextField: UITextField = {
         let textField = UITextField()
         textField.font = UIFont.boldSystemFont(ofSize: 16)
+        textField.tag = TextFieldTag.phoneNumberFieldTag.rawValue
         textField.textColor = UIColor.navigationTitleColor(a: 1.0)
         textField.isUserInteractionEnabled = false
         return textField
@@ -177,28 +177,51 @@ class GKContactDetailCell : GKTableViewCell {
     let emailTextField: UITextField = {
         let textField = UITextField()
         textField.font = UIFont.boldSystemFont(ofSize: 16)
+        textField.tag = TextFieldTag.emailFieldTag.rawValue
         textField.textColor = UIColor.navigationTitleColor(a: 1.0)
         textField.isUserInteractionEnabled = false
         return textField
     }()
 
-    let messageButton = GKContactListCell.buttonForTitle("message", imageName: "message_button")
-    let cameraButton = GKContactListCell.buttonForTitle("", imageName: "camera_button")
-    let callButton = GKContactListCell.buttonForTitle("call", imageName: "call_button")
-    let emailButton = GKContactListCell.buttonForTitle("email", imageName: "email_button")
-    let favouriteButton = GKContactListCell.buttonForTitle("favourite", imageName: "favourite_button")
+    let messageButton = GKContactDetailCell.buttonForTitle("message", imageName: "message_button", tag: .messageButtonTag)
+    let cameraButton = GKContactDetailCell.buttonForTitle("", imageName: "camera_button", tag: .cameraButtonTag)
+    let callButton = GKContactDetailCell.buttonForTitle("call", imageName: "call_button", tag: .callButtonTag)
+    let emailButton = GKContactDetailCell.buttonForTitle("email", imageName: "email_button", tag: .emailButtonTag)
+    let favouriteButton = GKContactDetailCell.buttonForTitle("favourite", imageName: "favourite_button", tag: .favouriteButtonTag)
     
-    static func buttonForTitle(_ title: String, imageName: String) -> UIButton {
+    static func buttonForTitle(_ title: String, imageName: String, tag: ButtonTag) -> UIButton {
         let button = UIButton()
+        button.tag = tag.rawValue
         button.setTitle(title, for: UIControl.State())
         button.setTitleColor(UIColor.lightGray, for: UIControl.State())
-        
         button.setImage(UIImage(named: imageName), for: UIControl.State())
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
-        
         return button
     }
     
+    @objc func buttonAction(_ sender : UIButton) {
+        if let controller = self.controller {
+            switch sender.tag {
+                case ButtonTag.cameraButtonTag.rawValue:
+                    controller.cameraAction(self)
+                    break
+                case ButtonTag.favouriteButtonTag.rawValue:
+                    controller.favouriteAction(self)
+                    break
+                case ButtonTag.callButtonTag.rawValue:
+                    controller.callAction(self)
+                    break
+                case ButtonTag.emailButtonTag.rawValue:
+                    controller.emailAction(self)
+                    break
+                case ButtonTag.messageButtonTag.rawValue:
+                    controller.messageAction(self)
+                    break
+                default:
+                    break
+            }
+        }
+    }
 }
 
 class GKContactDetailHeaderCell : GKContactDetailCell {
@@ -238,12 +261,15 @@ class GKContactDetailHeaderCell : GKContactDetailCell {
             addConstraintsWithFormat("H:|-\(xCenter)-[v0(124)]", views: profileImageView)
             addConstraintsWithFormat("V:|-84-[v0(124)]", views: profileImageView)
 
+            addConstraintsWithFormat("H:|-\((xCenter + 80))-[v0(44)]", views: cameraButton)
+            addConstraintsWithFormat("V:|-160-[v0(44)]", views: cameraButton) //84 + 120 - 44 = 160
+            
             xCenter = (screenWidth/2) - 100 // 200/2 = 100
             addConstraintsWithFormat("H:|-\(xCenter)-[v0(200)]", views: nameLabel)
             addConstraintsWithFormat("V:|-212-[v0(24)]", views: nameLabel) //84 + 120 + 8 = 212
             
             let distance = ((screenWidth - (44 * 4)) - 88)/3
-            addConstraintsWithFormat("H:|-44-[v0(44)]-\(distance)-[v1(44)]-\(distance)-[v2(44)]-\(distance)-[v3(44)]-44-|", views: messageButton, callButton, emailButton, favouriteButton)
+            addConstraintsWithFormat("H:|-44-[v0(44)]-\(distance)-[v1(44)]-\(distance)-[v2(44)]-\(distance)-[v3(44)]", views: messageButton, callButton, emailButton, favouriteButton)
             addConstraintsWithFormat("V:|-260-[v0(44)]", views: messageButton) //212 + 24 + 24 = 260
             addConstraintsWithFormat("V:|-260-[v0(44)]", views: callButton)
             addConstraintsWithFormat("V:|-260-[v0(44)]", views: emailButton)

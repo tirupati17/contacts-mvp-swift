@@ -9,10 +9,10 @@
 
 struct Contact: Codable {
     let id: Int
-    let firstName, lastName, email, phoneNumber: String?
-    let profilePic: String?
+    var firstName, lastName, email, phoneNumber: String?
+    var profilePic: String?
     var favorite: Bool = false
-    let createdAt, updatedAt: String?
+    var createdAt, updatedAt: String?
     
     enum CodingKeys: String, CodingKey {
         case id

@@ -30,6 +30,7 @@
 		D5411F7F2264923D00FFE4EE /* ContactsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F7E2264923D00FFE4EE /* ContactsUITests.swift */; };
 		D5411F892265AADD00FFE4EE /* GKURLSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F872265AADC00FFE4EE /* GKURLSessionManager.swift */; };
 		D5411F8B2265B59200FFE4EE /* GKURLConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5411F8A2265B59200FFE4EE /* GKURLConnectionManager.swift */; };
+		D58F44482269DB1500837662 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F44472269DB1400837662 /* String+Extension.swift */; };
 		D5CC181622685C7E00D4C91B /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC181522685C7E00D4C91B /* Int+Extension.swift */; };
 		D5CC18182268616C00D4C91B /* Codable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC18172268616C00D4C91B /* Codable+Extension.swift */; };
 		D5E8E4682267C2F400CBE016 /* GKContactDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8E4672267C2F400CBE016 /* GKContactDetailView.swift */; };
@@ -95,6 +96,7 @@
 		D5411F802264923D00FFE4EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5411F872265AADC00FFE4EE /* GKURLSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKURLSessionManager.swift; sourceTree = "<group>"; };
 		D5411F8A2265B59200FFE4EE /* GKURLConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKURLConnectionManager.swift; sourceTree = "<group>"; };
+		D58F44472269DB1400837662 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		D5CC181522685C7E00D4C91B /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		D5CC18172268616C00D4C91B /* Codable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extension.swift"; sourceTree = "<group>"; };
 		D5E8E4672267C2F400CBE016 /* GKContactDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKContactDetailView.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				D5F9B6B522677C0C00BB3052 /* UIColor+Extension.swift */,
 				D5CC181522685C7E00D4C91B /* Int+Extension.swift */,
 				D5CC18172268616C00D4C91B /* Codable+Extension.swift */,
+				D58F44472269DB1400837662 /* String+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				D5E8E46E2267C32300CBE016 /* GKContactDetailCell.swift in Sources */,
 				D5411F582264802A00FFE4EE /* GKContact.swift in Sources */,
 				D5E8E46C2267C31300CBE016 /* GKContactDetailProtocol.swift in Sources */,
+				D58F44482269DB1500837662 /* String+Extension.swift in Sources */,
 				D5411F4C22647F0A00FFE4EE /* GKRequest+Contacts.swift in Sources */,
 				D5411F8B2265B59200FFE4EE /* GKURLConnectionManager.swift in Sources */,
 				D5F9B6B622677C0C00BB3052 /* UIColor+Extension.swift in Sources */,

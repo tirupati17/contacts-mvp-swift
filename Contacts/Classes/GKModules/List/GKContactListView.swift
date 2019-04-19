@@ -92,11 +92,20 @@ class GKContactListView : GKViewController {
     }
     
     @objc func addContact() {
-        
+        let contactDetailView = GKContactDetailView()
+        contactDetailView.viewMode = .add
+        contactDetailView.dismissProtocol = self
+        self.presentController(UINavigationController.init(rootViewController: contactDetailView))
     }
     
     @objc func groupAction() {
         
+    }
+}
+
+extension GKContactListView : DismissProtocol {
+    func dismiss(_ sender : Any) { //Load data after contact add
+        self.loadData()
     }
 }
 

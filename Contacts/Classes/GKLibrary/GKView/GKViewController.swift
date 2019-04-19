@@ -8,6 +8,7 @@
 
 
 class GKViewController : GKBasicViewController, UIViewControllerProtocol, StoryboardIdentifiable {
+    
     var activityIndicatorView = UIActivityIndicatorView(style: .gray)
     
     lazy var refreshControl: UIRefreshControl = {
@@ -60,10 +61,12 @@ class GKViewController : GKBasicViewController, UIViewControllerProtocol, Storyb
     }
     
     func showAlertWithTitleAndMessage(title: String, message: String, handler: ((UIAlertAction) -> Swift.Void)? = nil) {
-        let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: handler))
-        self.present(alert, animated: true, completion: {
-        })
+        DispatchQueue.main.async {
+            let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: handler))
+            self.present(alert, animated: true, completion: {
+            })
+        }
     }
     
     func presentController<T>(_ vc: T) {
@@ -82,5 +85,13 @@ class GKViewController : GKBasicViewController, UIViewControllerProtocol, Storyb
     
     func didFailedResponse<T>(_ error : T) {
         self.stopViewAnimation()
+        if let error = error as? GKError {
+            self.showAlertWithTitleAndMessage(title: "Error!", message: error.localizedDescription)
+        }
     }
+    
+    func didSuccessfulResponse<T>(_ response: T) {
+        self.stopViewAnimation()
+    }
+    
 }
