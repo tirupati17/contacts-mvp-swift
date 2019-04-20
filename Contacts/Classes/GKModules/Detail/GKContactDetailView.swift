@@ -51,6 +51,7 @@ class GKContactDetailView : GKViewController {
         
         self.setupConstraints()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,6 +81,7 @@ class GKContactDetailView : GKViewController {
          self.navigationController?.navigationBar.shadowImage = nil
          self.navigationController?.navigationBar.isTranslucent = false
     }
+    
     func configureDependencies() {
         let contactDetailPresenter = GKContactDetailPresenter()
         contactDetailPresenter.contactDetailViewProtocol = self
@@ -402,4 +404,3 @@ extension GKContactDetailView : UITextFieldDelegate {
     }
 
 }
-

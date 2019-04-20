@@ -31,11 +31,14 @@ class GKURLConnectionManager {
     
     func connectionWithRequest(_ apiRequest: GKAPIRequest, success: ((JSON) ->
         Void)!, failure:((Error) -> Void)!) -> URLSessionTask {
+        UIApplication.showNetworkActivity()
         var dataRequest : URLSessionTask!
         dataRequest = GKURLSessionManager.performRequest(apiRequest, success: { (response) in
+            UIApplication.hideNetworkActivity()
             self.didPerformRequest(apiRequest)
             self.request(apiRequest, didReceiveResponse: response, success: success)
         }, failure: { (error) in
+            UIApplication.hideNetworkActivity()
             self.didPerformRequest(apiRequest)
             self.remoteRequestDidFail(apiRequest, error, failure: failure)
         })
@@ -77,4 +80,7 @@ class GKURLConnectionManager {
         failure(error)
     }
     
+    func showStatusActivityIndicator() {
+        
+    }
 }

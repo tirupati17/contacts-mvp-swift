@@ -38,6 +38,7 @@ class GKContactListView : GKViewController {
         
         self.setupConstraints()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
