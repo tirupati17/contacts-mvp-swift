@@ -1,7 +1,7 @@
 # GO-JEK Contacts App - MVP
 
 ### Description
-*Contacts* is an iOS app assignemnt given by GO-JEK to Tirupati Balan which is based on __MVP (Model View Presenter)__ concepts
+*Contacts* is an iOS app assignment given by GO-JEK to Tirupati Balan which is based on __MVP (Model View Presenter)__ concepts
 
 ### Run Requirements
 
