@@ -9,6 +9,7 @@
 import XCTest
 
 class ContactsUITests: XCTestCase {
+    var app: XCUIApplication!
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -16,19 +17,36 @@ class ContactsUITests: XCTestCase {
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
 
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
-
+        app = XCUIApplication()
+        
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
+    
+    // MARK: - Tests
+    
+    func testGoingForAddContactButtonsFlow() {
+        
+        app.launch()
+        
+        // Tap the "Groups" button for nothing
+        app.buttons["Groups"].tap()
+
+        // Tap the "Add" button to show Contact Add View
+        app.buttons["Add"].tap()
+        
+        // Tap the "camera button" button to show Gallary View
+        app.buttons["camera"].tap()
+
+        // Tap the "Cancel" button to hide Gallary View
+        app.buttons["Cancel"].tap()
+        
+        // Tap the "Cancel" button to hide Contact Add View
+        app.buttons["Cancel"].tap()
+    }
+    
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
 }

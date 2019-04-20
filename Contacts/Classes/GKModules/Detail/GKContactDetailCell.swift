@@ -188,7 +188,7 @@ class GKContactDetailCell : GKTableViewCell {
     }()
 
     let messageButton = GKContactDetailCell.buttonForTitle("message", imageName: "message_button", tag: .messageButtonTag)
-    let cameraButton = GKContactDetailCell.buttonForTitle("", imageName: "camera_button", tag: .cameraButtonTag)
+    let cameraButton = GKContactDetailCell.buttonForTitle("camera", imageName: "camera_button", tag: .cameraButtonTag)
     let callButton = GKContactDetailCell.buttonForTitle("call", imageName: "call_button", tag: .callButtonTag)
     let emailButton = GKContactDetailCell.buttonForTitle("email", imageName: "email_button", tag: .emailButtonTag)
     let favouriteButton = GKContactDetailCell.buttonForTitle("favourite", imageName: "favourite_button", tag: .favouriteButtonTag)
