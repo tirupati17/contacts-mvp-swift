@@ -224,9 +224,13 @@ class GKContactDetailView : GKTableViewController {
         }
     }
     
-    override func didSuccessfulResponse<T>(_ response : T) {
-        self.dismiss(animated: true, completion: nil)
+    @objc func deleteAction() {
+        if let contact = self.contact {
+            self.startViewAnimation()
+            self.contactDetailPresenterProtocol.didDeleteContact(contact: contact)
+        }
     }
+    
 }
 
 extension GKContactDetailView : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -247,6 +251,23 @@ extension GKContactDetailView : UIImagePickerControllerDelegate, UINavigationCon
 }
 
 extension GKContactDetailView : GKContactDetailViewProtocol {
+    
+    func didSuccessfullyAdded<T>(_ response : T) {
+        self.stopViewAnimation()
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+
+    func didSuccessfullyDeleted<T>(_ response : T) {
+        self.stopViewAnimation()
+        DispatchQueue.main.async {
+            if let navigationController = self.navigationController {
+                navigationController.popViewController(animated: true)
+            }
+        }
+    }
+
     func updateContactDetail(_ contact: Contact?) {
         if let contact = contact {
             self.contact = contact
@@ -292,6 +313,19 @@ extension GKContactDetailView  {
                 }
         }
 
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return self.viewMode == .edit || self.viewMode == .view ? 50 : 0
+    }
+
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let button = UIButton()
+        button.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50)
+        button.setTitle("Delete", for: .normal)
+        button.setTitleColor(UIColor.red, for: .normal)
+        button.addTarget(self, action: #selector(self.deleteAction), for: .touchUpInside)
+        return button
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

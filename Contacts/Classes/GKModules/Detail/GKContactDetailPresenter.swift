@@ -32,14 +32,18 @@ extension GKContactDetailPresenter : GKContactDetailPresenterProtocol {
     
     func didCreateContact(forContact : Contact) {
         GKAPIRequest.contactCreate(forContact.dictionary ?? [:], success: { (response) in
-            self.contactDetailViewProtocol.didSuccessfulResponse(response as? Contact)
+            self.contactDetailViewProtocol.didSuccessfullyAdded(response as? Contact)
         }) { (error) in
             self.contactDetailViewProtocol.didFailedResponse(error)
         }
     }
     
     func didDeleteContact(contact : Contact) {
-        
+        GKAPIRequest.contactDelete(contact.id.toString(), success: { (response) in
+            self.contactDetailViewProtocol.didSuccessfullyDeleted(response as? Contact)
+        }) { (error) in
+            self.contactDetailViewProtocol.didFailedResponse(error)
+        }
     }
     
     func didUpdateFavourite(forContact : Contact) {

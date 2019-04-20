@@ -8,6 +8,8 @@
 
 protocol GKContactDetailViewProtocol : UIViewControllerProtocol {
     func updateContactDetail(_ contact: Contact?)
+    func didSuccessfullyDeleted<T>(_ response : T)
+    func didSuccessfullyAdded<T>(_ response : T)
 }
 
 protocol GKContactDetailPresenterProtocol {
