@@ -39,6 +39,7 @@
 		D58F446B226A40A700837662 /* GKContactListViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F4463226A40A700837662 /* GKContactListViewTests.swift */; };
 		D58F446C226A40A700837662 /* GKContactDetailViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F4464226A40A700837662 /* GKContactDetailViewTests.swift */; };
 		D58F446D226A40A700837662 /* GKContactDetailPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F4465226A40A700837662 /* GKContactDetailPresenterTests.swift */; };
+		D58F446F226B003E00837662 /* GKTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F446E226B003E00837662 /* GKTableViewController.swift */; };
 		D5CC181622685C7E00D4C91B /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC181522685C7E00D4C91B /* Int+Extension.swift */; };
 		D5CC18182268616C00D4C91B /* Codable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC18172268616C00D4C91B /* Codable+Extension.swift */; };
 		D5E8E4682267C2F400CBE016 /* GKContactDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8E4672267C2F400CBE016 /* GKContactDetailView.swift */; };
@@ -113,6 +114,7 @@
 		D58F4463226A40A700837662 /* GKContactListViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKContactListViewTests.swift; sourceTree = "<group>"; };
 		D58F4464226A40A700837662 /* GKContactDetailViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKContactDetailViewTests.swift; sourceTree = "<group>"; };
 		D58F4465226A40A700837662 /* GKContactDetailPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKContactDetailPresenterTests.swift; sourceTree = "<group>"; };
+		D58F446E226B003E00837662 /* GKTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKTableViewController.swift; sourceTree = "<group>"; };
 		D5CC181522685C7E00D4C91B /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		D5CC18172268616C00D4C91B /* Codable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extension.swift"; sourceTree = "<group>"; };
 		D5E8E4672267C2F400CBE016 /* GKContactDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKContactDetailView.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			children = (
 				D5411F5F2264822D00FFE4EE /* GKBasicViewController.swift */,
 				D5411F612264824200FFE4EE /* GKViewController.swift */,
+				D58F446E226B003E00837662 /* GKTableViewController.swift */,
 				D5F9B6A32267009300BB3052 /* GKTableViewCell.swift */,
 			);
 			path = GKView;
@@ -574,6 +577,7 @@
 				D5411F5222647F9B00FFE4EE /* GKAPIConstant.swift in Sources */,
 				D5411F602264822D00FFE4EE /* GKBasicViewController.swift in Sources */,
 				D5F9B6AE2267631F00BB3052 /* UIView+Extension.swift in Sources */,
+				D58F446F226B003E00837662 /* GKTableViewController.swift in Sources */,
 				D5411F5022647F5500FFE4EE /* GKAPIRequest+Contacts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

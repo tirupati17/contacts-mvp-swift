@@ -21,8 +21,7 @@ enum ViewMode {
     case view
 }
 
-class GKContactDetailView : GKViewController {
-    var tableView : UITableView!
+class GKContactDetailView : GKTableViewController {
     var contactDetailPresenterProtocol : GKContactDetailPresenterProtocol!
     var contact : Contact!
     var isUpdatedConstraints : Bool? = false
@@ -33,7 +32,6 @@ class GKContactDetailView : GKViewController {
         super.loadView()
         self.configureDependencies()
         
-        tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(GKContactDetailHeaderCell.self, forCellReuseIdentifier: contactDetailHeaderCellId)
@@ -46,8 +44,6 @@ class GKContactDetailView : GKViewController {
         tableView.sectionIndexColor = .darkGray
         tableView.sectionIndexBackgroundColor = .clear
         tableView.tableFooterView = UIView.init()
-        
-        view.addSubview(tableView)
         
         self.setupConstraints()
     }
@@ -92,8 +88,6 @@ class GKContactDetailView : GKViewController {
         if (isUpdatedConstraints == false) {
             isUpdatedConstraints = true
             
-            view.addConstraintsWithFormat("H:|[v0]|", views: tableView)
-            view.addConstraintsWithFormat("V:|[v0]|", views: tableView)
         }
     }
     
@@ -171,7 +165,7 @@ class GKContactDetailView : GKViewController {
     }
     
     @objc func cancelAdd() {
-        self.dismissSelf()
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func cancelEdit() {
@@ -231,7 +225,7 @@ class GKContactDetailView : GKViewController {
     }
     
     override func didSuccessfulResponse<T>(_ response : T) {
-        self.dismissSelf() //Contact successfully added
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -264,14 +258,14 @@ extension GKContactDetailView : GKContactDetailViewProtocol {
     }
 }
 
-extension GKContactDetailView : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+extension GKContactDetailView {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
-extension GKContactDetailView : UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension GKContactDetailView  {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch self.viewMode {
             case .add, .edit:
                 return 5
@@ -280,7 +274,7 @@ extension GKContactDetailView : UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch self.viewMode {
             case .add, .edit:
                 switch indexPath.row {
@@ -300,7 +294,7 @@ extension GKContactDetailView : UITableViewDataSource {
 
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
             case 0:
                 if let cell = tableView.dequeueReusableCell(withIdentifier: contactDetailHeaderCellId) as? GKContactDetailHeaderCell {

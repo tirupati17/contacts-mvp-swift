@@ -121,6 +121,7 @@ class GKContactDetailCell : GKTableViewCell {
         let textField = UITextField()
         textField.font = UIFont.boldSystemFont(ofSize: 16)
         textField.tag = TextFieldTag.firstNameFieldTag.rawValue
+        textField.placeholder = "Enter first name"
         textField.textColor = UIColor.navigationTitleColor(a: 1.0)
         textField.isUserInteractionEnabled = false
         return textField
@@ -140,6 +141,7 @@ class GKContactDetailCell : GKTableViewCell {
         let textField = UITextField()
         textField.font = UIFont.boldSystemFont(ofSize: 16)
         textField.tag = TextFieldTag.lastNameFieldTag.rawValue
+        textField.placeholder = "Enter last name"
         textField.textColor = UIColor.navigationTitleColor(a: 1.0)
         textField.isUserInteractionEnabled = false
         return textField
@@ -147,7 +149,7 @@ class GKContactDetailCell : GKTableViewCell {
 
     let mobileStaticLabel: UILabel = {
         let label = UILabel()
-        label.text = "mobile"
+        label.text = "Mobile"
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textAlignment = .right
         label.textColor = UIColor.navigationTitleColor(a: 0.5)
@@ -158,6 +160,7 @@ class GKContactDetailCell : GKTableViewCell {
     let mobileTextField: UITextField = {
         let textField = UITextField()
         textField.font = UIFont.boldSystemFont(ofSize: 16)
+        textField.placeholder = "Enter mobile"
         textField.tag = TextFieldTag.phoneNumberFieldTag.rawValue
         textField.textColor = UIColor.navigationTitleColor(a: 1.0)
         textField.isUserInteractionEnabled = false
@@ -166,7 +169,7 @@ class GKContactDetailCell : GKTableViewCell {
     
     let emailStaticLabel: UILabel = {
         let label = UILabel()
-        label.text = "email"
+        label.text = "Email"
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textAlignment = .right
         label.textColor = UIColor.navigationTitleColor(a: 0.5)
@@ -177,6 +180,7 @@ class GKContactDetailCell : GKTableViewCell {
     let emailTextField: UITextField = {
         let textField = UITextField()
         textField.font = UIFont.boldSystemFont(ofSize: 16)
+        textField.placeholder = "Enter email"
         textField.tag = TextFieldTag.emailFieldTag.rawValue
         textField.textColor = UIColor.navigationTitleColor(a: 1.0)
         textField.isUserInteractionEnabled = false
