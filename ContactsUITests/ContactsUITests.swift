@@ -36,7 +36,7 @@ class ContactsUITests: XCTestCase {
         
         // Tap the "camera button" button to show Gallary View
         app.buttons["camera"].tap()
-
+        
         // Tap the "Cancel" button to hide Gallary View
         app.buttons["Cancel"].tap()
         
