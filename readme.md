@@ -1,7 +1,7 @@
 # Contacts App Assignment - MVP
 
 ### Description
-*Contacts* is an iOS app assignment given by [Product Based Company] to Tirupati Balan which is based on __MVP (Model View Presenter)__ software architectural pattern.
+*Contacts* is an iOS app assignment based on __MVP (Model View Presenter)__ software architectural pattern.
 
 ### Run Requirements
 
