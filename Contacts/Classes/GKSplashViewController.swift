@@ -12,12 +12,16 @@ class GKSplashViewController: GKViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let vc = GKContactListView()
-        let nv = UINavigationController.init(rootViewController: vc)
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
-            self.presentController(nv)
-        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.perform(#selector(showMainView), with: nil, afterDelay: 0.1)
+    }
+    
+    @objc func showMainView() {
+        UIApplication.shared.delegate?.window??.rootViewController = UINavigationController.init(rootViewController: GKContactListView())
     }
 
 }
