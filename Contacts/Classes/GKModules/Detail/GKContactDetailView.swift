@@ -352,7 +352,7 @@ extension GKContactDetailView  {
                     cell.controller = self
                     cell.mobileTextField.isUserInteractionEnabled = (self.viewMode == .edit || self.viewMode == .add)
                     cell.mobileTextField.delegate = self
-                    cell.mobileTextField.keyboardType = .numbersAndPunctuation
+                    cell.mobileTextField.keyboardType = .phonePad
                     if let contact = self.contact {
                         cell.contact = contact
                     }
